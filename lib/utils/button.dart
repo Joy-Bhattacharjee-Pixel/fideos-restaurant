@@ -3,14 +3,16 @@ import 'package:get/get.dart';
 
 class ButtonManager {
   String text;
+
+  Color? backgroundcolor;
   Function() onPressed;
 
-  ButtonManager({required this.onPressed, required this.text});
+  ButtonManager({required this.onPressed, required this.text, this.backgroundcolor});
 
   elevated() => ElevatedButton(onPressed: () => onPressed(), style: elevatedStyle(), child: Text(text, style: const TextStyle(color: Colors.white)));
 
   elevatedStyle() => ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF437FF7),
+        backgroundColor: backgroundcolor,
         fixedSize: Size(Get.width, 43),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
       );

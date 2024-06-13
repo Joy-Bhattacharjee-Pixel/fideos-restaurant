@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AuthController extends GetxController{
+class AuthController extends GetxController {
   // Email text field controller for login screen
   final TextEditingController loginEmailController = TextEditingController();
 
@@ -14,14 +14,19 @@ class AuthController extends GetxController{
   // Password text field controller for login screen
   final TextEditingController regPasswordController = TextEditingController();
 
-  
-
-
   // Login form key
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
-  // Register form key 
-  final GlobalKey<FormState> registerFormKey =  GlobalKey<FormState>();
+  // Register form key
+  final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
 
-  
+// login password obsecurity
+  RxBool loginpasswordObsecured = true.obs;
+
+  // List of terms condition options
+  List<String> termsconditionoptions = <String>[
+    "Terms of Service",
+    "Privacy Policy",
+    "Content Policy"
+  ];
 }
