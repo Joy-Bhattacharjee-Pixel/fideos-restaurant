@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AuthController extends GetxController  {
+class AuthController extends GetxController {
   // Email text field controller for login screen
   final TextEditingController loginEmailController = TextEditingController();
 
@@ -54,8 +54,6 @@ class AuthController extends GetxController  {
 
   // Register form key
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
-  // Register form key
-  final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
 
 // login password obsecurity
   RxBool loginpasswordObsecured = true.obs;
@@ -66,10 +64,6 @@ class AuthController extends GetxController  {
     "Privacy Policy",
     "Content Policy"
   ];
-}
-
-  // Registration food type
-  List foodType = ["Veg", "Non Veg", "Both"];
 
   // restuarant open days
   List weekDays = [
@@ -82,10 +76,14 @@ class AuthController extends GetxController  {
     "Satureday"
   ];
 
-  RxInt servingIndex  = 0.obs;
+  // Registration food type
+  List foodType = ["Veg", "Non Veg", "Both"];
   
+  RxInt servingIndex = 0.obs;
+
   // Registration selected food type
   Rx<String> selectedFood = "Veg".obs;
 
   // restuarant selected open days
   RxList selectedDays = [].obs;
+}

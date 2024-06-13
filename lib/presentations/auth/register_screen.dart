@@ -150,8 +150,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           alignment: Alignment.centerRight,
                           child: OutlinedButton(
                               onPressed: () {
-                                _controller.servingIndex.value =
-                                    _controller.servingIndex.value + 1;
+                               
                               },
                               child: const Icon(Icons.add))),
 
