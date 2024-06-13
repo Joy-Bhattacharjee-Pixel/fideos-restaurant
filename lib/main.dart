@@ -1,7 +1,5 @@
 import 'package:fideos_restaurant/models/app_color.dart';
 import 'package:fideos_restaurant/presentations/auth/login_screen.dart';
-import 'package:fideos_restaurant/presentations/auth/register_screen.dart';
-import 'package:fideos_restaurant/presentations/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

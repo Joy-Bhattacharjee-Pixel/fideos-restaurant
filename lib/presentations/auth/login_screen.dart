@@ -22,136 +22,135 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Form(
-            // Form key
-            key: _controller.loginFormKey,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // top Image
-                  const Image(image: AssetImage("assets/auth_screen.png")),
+        body: SingleChildScrollView(
+      child: Form(
+          // Form key
+          key: _controller.loginFormKey,
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            // top Image
+            const Image(image: AssetImage("assets/auth_screen.png")),
 
-                  // Adding some space
-                  const SizedBox(height: 10),
+            // Adding some space
+            const SizedBox(height: 10),
 
-                  // Title for restaurat
-                  const Text("India’s #1 Food Video and Delivery App",
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
+            // Title for restaurat
+            const Text("India’s #1 Food Video and Delivery App",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
 
-                  // Adding some space
-                  const SizedBox(height: 20),
+            // Adding some space
+            const SizedBox(height: 20),
 
-                  // putting divider section
-                  Seperator(text: "Log in or Sign up").show(),
+            // putting divider section
+            Seperator(text: "Log in or Sign up").show(),
 
-                  // Adding some space
-                  const SizedBox(height: 20),
+            // Adding some space
+            const SizedBox(height: 20),
 
-                  // Restaurat email text field
-                  Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: TextFieldService(
-                              controller: _controller.loginEmailController,
-                              validator: (email) =>
-                                  _emailValidator(email: email),
-                              hint: "Enter email address")
-                          .show()),
+            // Restaurat email text field
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: TextFieldService(
+                        controller: _controller.loginEmailController,
+                        validator: (email) => _emailValidator(email: email),
+                        hint: "Enter email address")
+                    .show()),
 
-                  // Adding some space
-                  const SizedBox(height: 10),
+            // Adding some space
+            const SizedBox(height: 10),
 
-                  // Restaurat password text field
-                  Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: TextFieldService(
-                          controller: _controller.loginPasswordController,
-                          hint: "Password",
-                          passwordObsecured:
-                              _controller.loginpasswordObsecured.value,
-                          onTapSuffix: () =>
-                              _controller.loginpasswordObsecured.value =
-                                  !_controller.loginpasswordObsecured.value,
-                          suffix: _controller.loginpasswordObsecured.value
-                              ? Feather.eye
-                              : Feather.eye_off,
-                          validator: (password) =>
-                              _passwordValidator(password: password)).show()),
+            // Restaurat password text field
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: TextFieldService(
+                    controller: _controller.loginPasswordController,
+                    hint: "Password",
+                    passwordObsecured: _controller.loginpasswordObsecured.value,
+                    onTapSuffix: () => _controller.loginpasswordObsecured
+                        .value = !_controller.loginpasswordObsecured.value,
+                    suffix: _controller.loginpasswordObsecured.value
+                        ? Feather.eye
+                        : Feather.eye_off,
+                    validator: (password) =>
+                        _passwordValidator(password: password)).show()),
 
-                  // forgot password option
-                  Padding(
-                      padding: const EdgeInsets.only(top: 8.0, right: 14),
-                      child: GestureDetector(
-                          onTap: () {},
-                          child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Text("Forgot Password?",
-                                  style: TextStyle(
-                                      color: ColorManager.primary,
-                                      fontSize: 12.5,
-                                      fontWeight: FontWeight.bold))))),
-
-                  // give space
-                  const SizedBox(height: 15),
-
-                  // continue button
-                  Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: ButtonManager(
-                              onPressed: () {},
-                              backgroundcolor: ColorManager.primary,
-                              text: "Continue")
-                          .elevated()),
-
-                  // Adding some space
-                  const SizedBox(height: 30),
-
-                  // putting divider section
-                  Seperator(text: "or").show(),
-
-                  // give space
-                  const SizedBox(height: 15),
-
-                  // register option
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    const Text("Don't have an restaurant account?",
-                        style: TextStyle(color: Colors.black, fontSize: 13.5)),
-                    // give space
-                    const SizedBox(width: 5),
-                    InkWell(
-                        onTap: () => Get.to(() => const RegisterScreen()),
-                        child: Text("Sign Up Now",
+            // forgot password option
+            Padding(
+                padding: const EdgeInsets.only(top: 8.0, right: 14),
+                child: GestureDetector(
+                    onTap: () {},
+                    child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text("Forgot Password?",
                             style: TextStyle(
                                 color: ColorManager.primary,
-                                fontSize: 13.5,
-                                fontWeight: FontWeight.bold)))
-                  ]),
+                                fontSize: 12.5,
+                                fontWeight: FontWeight.bold))))),
 
-                  // give space
-                  const SizedBox(height: 30),
+            // give space
+            const SizedBox(height: 15),
 
-                  //  continuing agree text
-                  const Text("By continuing, you agree to our",
-                      style: TextStyle(fontSize: 13)),
+            // continue button
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: ButtonManager(
+                        onPressed: () {},
+                        backgroundcolor: ColorManager.primary,
+                        text: "Continue")
+                    .elevated()),
 
-                  // give space
-                  const SizedBox(height: 6),
+            // Adding some space
+            const SizedBox(height: 30),
 
-                  // terms and conditions Options list
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: _controller.termsconditionoptions
-                          .map((e) => Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 7),
-                              child: Text(e,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12,
-                                      color: ColorManager.primary))))
-                          .toList())
-                ])));
+            // putting divider section
+            Seperator(text: "or").show(),
+
+            // give space
+            const SizedBox(height: 15),
+
+            // register option
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              const Text("Don't have an restaurant account?",
+                  style: TextStyle(color: Colors.black, fontSize: 13.5)),
+              // give space
+              const SizedBox(width: 5),
+              InkWell(
+                  onTap: () => Get.to(() => const RegisterScreen()),
+                  child: Text("Sign Up Now",
+                      style: TextStyle(
+                          color: ColorManager.primary,
+                          fontSize: 13.5,
+                          fontWeight: FontWeight.bold)))
+            ]),
+
+            // give space
+            const SizedBox(height: 30),
+
+            //  continuing agree text
+            const Text("By continuing, you agree to our",
+                style: TextStyle(fontSize: 13)),
+
+            // give space
+            const SizedBox(height: 6),
+
+            // terms and conditions Options list
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: _controller.termsconditionoptions
+                    .map((e) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 7),
+                        child: Text(e,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                                color: ColorManager.primary))))
+                    .toList()),
+
+            // give space
+            const SizedBox(height: 20),
+          ])),
+    ));
   }
 
 // email validator

@@ -149,10 +149,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Align(
                           alignment: Alignment.centerRight,
                           child: OutlinedButton(
-                              onPressed: () {
-                               
-                              },
-                              child: const Icon(Icons.add))),
+                              onPressed: () {}, child: const Icon(Icons.add))),
 
                       // Adding some space
                       const SizedBox(height: 15),
@@ -309,7 +306,59 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       // Register button
                       ButtonManager(onPressed: () {}, text: "Register")
-                          .elevated()
+                          .elevated(),
+
+                      // Adding some space
+                      const SizedBox(height: 30),
+
+                      // putting divider section
+                      Seperator(text: "or").show(),
+
+                      // give space
+                      const SizedBox(height: 15),
+
+                      // register option
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("Already have an account?",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 13.5)),
+                            // give space
+                            const SizedBox(width: 5),
+                            InkWell(
+                                onTap: () =>
+                                    Get.to(() => const RegisterScreen()),
+                                child: Text("Log In Now",
+                                    style: TextStyle(
+                                        color: ColorManager.primary,
+                                        fontSize: 13.5,
+                                        fontWeight: FontWeight.bold)))
+                          ]),
+
+                      // give space
+                      const SizedBox(height: 30),
+
+                      //  continuing agree text
+                      const Text("By continuing, you agree to our",
+                          style: TextStyle(fontSize: 13)),
+
+                      // give space
+                      const SizedBox(height: 6),
+
+                      // terms and conditions Options list
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: _controller.termsconditionoptions
+                              .map((e) => Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 7),
+                                  child: Text(e,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12,
+                                          color: ColorManager.primary))))
+                              .toList())
                     ],
                   ),
                 )
