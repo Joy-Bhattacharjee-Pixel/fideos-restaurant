@@ -1,3 +1,4 @@
+import 'package:fideos_restaurant/models/app_color.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldService {
@@ -31,8 +32,9 @@ class TextFieldService {
         obscureText: passwordObsecured,
         style: const TextStyle(fontSize: 14),
         decoration: InputDecoration(
-            enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-            border: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+            enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+            border: const OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+            focusedBorder: const OutlineInputBorder(borderSide: BorderSide(width: 1)),
             suffixIcon: GestureDetector(
                 onTap: () {
                   if (onTapSuffix != null) {

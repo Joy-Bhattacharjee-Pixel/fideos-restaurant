@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
               // Title for restaurat
               const Text("India’s #1 Food Video and Delivery App",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
 
               // Adding some space
               const SizedBox(height: 20),

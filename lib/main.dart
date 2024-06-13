@@ -1,3 +1,4 @@
+import 'package:fideos_restaurant/models/app_color.dart';
 import 'package:fideos_restaurant/presentations/auth/login_screen.dart';
 import 'package:fideos_restaurant/presentations/auth/register_screen.dart';
 import 'package:fideos_restaurant/presentations/splash/splash_screen.dart';
@@ -18,10 +19,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: ColorManager.primary),
         useMaterial3: true,
+        primaryColor: ColorManager.primary
       ),
-      home: const LoginScreen()
+      home: const RegisterScreen()
     );
   }
 }

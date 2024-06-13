@@ -9,6 +9,7 @@ class Separator {
       {this.horizontalPadding = 15,
       this.verticalPadding = 0,
       required this.text});
+
   show() => Padding(
       padding: EdgeInsets.symmetric(
           horizontal: horizontalPadding, vertical: verticalPadding),
