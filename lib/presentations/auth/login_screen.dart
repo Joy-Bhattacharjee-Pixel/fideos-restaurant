@@ -20,25 +20,25 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Form(
           // Form key
           key: _controller.loginFormKey,
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Image
-              Image(image: AssetImage("assets/auth_screen.png")),
+              const Image(image: AssetImage("assets/auth_screen.png")),
 
               // Adding some space
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
 
               // Title for restaurat
-              Text("India’s #1 Food Video and Delivery App",
+              const Text("India’s #1 Food Video and Delivery App",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
 
               // Adding some space
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // putting divider section
-              const Separator(text: "Log in or Sign up"),
+              Separator(text: "Log in or Sign up").show()
             ],
           )),
     );
