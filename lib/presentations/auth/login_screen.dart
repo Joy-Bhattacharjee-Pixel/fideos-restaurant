@@ -1,4 +1,5 @@
 import 'package:fideos_restaurant/controllers/auth_controller.dart';
+import 'package:fideos_restaurant/utils/separator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,7 +37,8 @@ class _LoginScreenState extends State<LoginScreen> {
               // Adding some space
               SizedBox(height: 20),
 
-
+              // putting divider section
+              const Separator(text: "Log in or Sign up"),
             ],
           )),
     );

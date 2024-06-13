@@ -1,3 +1,4 @@
+import 'package:fideos_restaurant/presentations/auth/login_screen.dart';
 import 'package:fideos_restaurant/utils/cookies.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
   _checkRoute() async {
     final id = await CookieManager("id").get();
     if (id == null) {
-      Get.to(() => const SizedBox());
+      Get.to(() => const LoginScreen());
     } else {
       Get.to(() => Container());
     }
