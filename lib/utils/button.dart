@@ -4,9 +4,11 @@ import 'package:get/get.dart';
 
 class ButtonManager {
   String text;
+
+  Color? backgroundcolor;
   Function() onPressed;
 
-  ButtonManager({required this.onPressed, required this.text});
+  ButtonManager({required this.onPressed, required this.text, this.backgroundcolor});
 
   elevated() => ElevatedButton(
       onPressed: () => onPressed(),

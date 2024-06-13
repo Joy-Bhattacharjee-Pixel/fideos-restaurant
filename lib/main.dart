@@ -16,14 +16,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: ColorManager.primary),
-        useMaterial3: true,
-        primaryColor: ColorManager.primary
-      ),
-      home: const RegisterScreen()
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: ColorManager.primary),
+            useMaterial3: true,
+            primaryColor: ColorManager.primary),
+        home: const LoginScreen());
   }
 }
