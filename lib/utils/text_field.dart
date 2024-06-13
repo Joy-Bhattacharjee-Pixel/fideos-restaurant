@@ -45,6 +45,7 @@ class TextFieldService {
             hintText: hint,
             hintStyle: const TextStyle(
               fontSize: 13,
+              fontFamily: "Lexend",
               color: Colors.grey,
             )),
       );

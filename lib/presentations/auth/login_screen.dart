@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 20),
 
               // putting divider section
-              Separator(text: "Log in or Sign up").show()
+              Seperator(text: "Log in or Sign up").show()
             ],
           )),
     );

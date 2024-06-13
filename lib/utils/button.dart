@@ -1,3 +1,4 @@
+import 'package:fideos_restaurant/models/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,15 +8,19 @@ class ButtonManager {
 
   ButtonManager({required this.onPressed, required this.text});
 
-  elevated() => ElevatedButton(onPressed: () => onPressed(), style: elevatedStyle(), child: Text(text, style: const TextStyle(color: Colors.white)));
+  elevated() => ElevatedButton(
+      onPressed: () => onPressed(),
+      style: elevatedStyle(),
+      child: Text(text, style: const TextStyle(color: Colors.white)));
 
   elevatedStyle() => ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF437FF7),
+        backgroundColor: ColorManager.primary,
         fixedSize: Size(Get.width, 43),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
       );
 
-  outline() => OutlinedButton(onPressed: () => onPressed(), style: outlineStyle(), child: Text(text));
+  outline() => OutlinedButton(
+      onPressed: () => onPressed(), style: outlineStyle(), child: Text(text));
 
   outlineStyle() => OutlinedButton.styleFrom(
         fixedSize: Size(Get.width, 43),

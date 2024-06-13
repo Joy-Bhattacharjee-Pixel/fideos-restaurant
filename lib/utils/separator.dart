@@ -1,11 +1,11 @@
 import 'package:fideos_restaurant/models/app_color.dart';
 import 'package:flutter/material.dart';
 
-class Separator {
+class Seperator {
   final double horizontalPadding;
   final double verticalPadding;
   final String text;
-  Separator(
+  Seperator(
       {this.horizontalPadding = 15,
       this.verticalPadding = 0,
       required this.text});
@@ -24,7 +24,7 @@ class Separator {
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 7.0),
                 child: Text(text,
-                    style: TextStyle(color: ColorManager.grey, fontSize: 12))),
+                    style: TextStyle(color: ColorManager.grey, fontFamily: "Lexend", fontSize: 12))),
 
             // expande right side divider
             const Expanded(child: Divider(color: Colors.black12))
