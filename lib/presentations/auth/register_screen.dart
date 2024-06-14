@@ -22,6 +22,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: ColorManager.white,
         body: Form(
             key: _controller.registerFormKey,
             child: SingleChildScrollView(
@@ -36,7 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const Text("India’s #1 Food Video and Delivery App",
                     textAlign: TextAlign.center,
                     style:
-                        TextStyle(fontSize: 25, fontWeight: FontWeight.w500)),
+                        TextStyle(fontSize: 22, fontWeight: FontWeight.w600)),
 
                 // Adding some space
                 const SizedBox(height: 20),
@@ -108,8 +109,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       // Full address field
                       TextFieldService(
-                              controller:
-                                  _controller.regConfirmPasswordController,
+                              controller: _controller.regFullAddressController,
                               hint: "Full Address")
                           .show(),
 
@@ -118,8 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       // City field
                       TextFieldService(
-                              controller:
-                                  _controller.regConfirmPasswordController,
+                              controller: _controller.regCityController,
                               hint: "City")
                           .show(),
 
@@ -128,19 +127,66 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       // State field
                       TextFieldService(
-                              controller:
-                                  _controller.regConfirmPasswordController,
+                              controller: _controller.regStateController,
                               hint: "State")
                           .show(),
 
                       // Adding some space
                       const SizedBox(height: 10),
 
-                      // Serving field
+                      // State field
                       TextFieldService(
-                              controller: _controller.regServingController,
-                              hint: "Serving")
+                              controller: _controller.regCountryController,
+                              hint: "Country")
                           .show(),
+
+                      // Adding some space
+                      const SizedBox(height: 10),
+                      // State field
+                      TextFieldService(
+                              controller: _controller.regPincodeController,
+                              hint: "Pin Code")
+                          .show(),
+
+                      // Adding some space
+                      const SizedBox(height: 15),
+
+                      // Food type title seperator
+                      Seperator(text: "Servings", horizontalPadding: 0).show(),
+
+                      // Adding some space
+                      const SizedBox(height: 15),
+
+                      // Serving field
+                      Obx(() {
+                        if (_controller.servingIndex.value == 0) {
+                          return TextFieldService(
+                                  controller: _controller.regServingController,
+                                  hint: "Serving")
+                              .show();
+                        } else {
+                          return Column(
+                            children: [
+                              ...List.generate(
+                                  _controller.servings.length,
+                                  (index) => Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: TextFieldService(
+                                              controller: _controller
+                                                  .regServingController,
+                                              suffix: Icons.close,
+                                              onTapSuffix: () {
+                                                _controller.servingIndex.value =
+                                                    _controller.servingIndex
+                                                            .value -
+                                                        1;
+                                              },
+                                              hint: "Serving")
+                                          .show()))
+                            ],
+                          );
+                        }
+                      }),
 
                       // Adding some space
                       const SizedBox(height: 10),
@@ -149,7 +195,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Align(
                           alignment: Alignment.centerRight,
                           child: OutlinedButton(
-                              onPressed: () {}, child: const Icon(Icons.add))),
+                              onPressed: () {
+                                _controller.servingIndex.value =
+                                    _controller.servingIndex.value + 1;
+                                // _controller.addServings();
+                              },
+                              child: const Icon(Icons.add))),
 
                       // Adding some space
                       const SizedBox(height: 15),

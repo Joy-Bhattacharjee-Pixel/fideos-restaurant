@@ -2,6 +2,7 @@ import 'package:fideos_restaurant/controllers/auth_controller.dart';
 import 'package:fideos_restaurant/models/app_color.dart';
 import 'package:fideos_restaurant/presentations/auth/register_screen.dart';
 import 'package:fideos_restaurant/utils/button.dart';
+import 'package:fideos_restaurant/utils/loader.dart';
 import 'package:fideos_restaurant/utils/separator.dart';
 import 'package:fideos_restaurant/utils/text_field.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   // Importing auth controller
-  final _controller = Get.put(AuthController());
+  final _controller = AuthController();
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +67,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: TextFieldService(
                     controller: _controller.loginPasswordController,
                     hint: "Password",
-                    passwordObsecured: _controller.loginpasswordObsecured.value,
-                    onTapSuffix: () => _controller.loginpasswordObsecured
-                        .value = !_controller.loginpasswordObsecured.value,
-                    suffix: _controller.loginpasswordObsecured.value
+                    passwordObsecured: _controller.loginPasswordObsecured.value,
+                    onTapSuffix: () => _controller.loginPasswordObsecured
+                        .value = !_controller.loginPasswordObsecured.value,
+                    suffix: _controller.loginPasswordObsecured.value
                         ? Feather.eye
                         : Feather.eye_off,
                     validator: (password) =>
@@ -92,13 +93,15 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 15),
 
             // continue button
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: ButtonManager(
-                        onPressed: () {},
-                        backgroundcolor: ColorManager.primary,
-                        text: "Continue")
-                    .elevated()),
+            Obx(() => _controller.loadingLogin.value
+                ? Loader().show()
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: ButtonManager(
+                            onPressed: () => _login(),
+                            backgroundcolor: ColorManager.primary,
+                            text: "Continue")
+                        .elevated())),
 
             // Adding some space
             const SizedBox(height: 30),
@@ -153,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
     ));
   }
 
-// email validator
+// Email validator
   _emailValidator({String? email}) {
     if (email == null || email.isEmpty || !email.isEmail) {
       return "Please enter a valid email";
@@ -167,5 +170,18 @@ class _LoginScreenState extends State<LoginScreen> {
       return "Please enter a valid password";
     }
     return null;
+  }
+
+  // Calling login function using controller
+  _login() {
+    FocusScope.of(context).unfocus();
+
+    // Validating form
+    if (_controller.loginFormKey.currentState!.validate()) {
+      _controller.loginFormKey.currentState!.save();
+      _controller.login(
+          email: _controller.loginEmailController.text.trim(),
+          password: _controller.loginPasswordController.text.trim());
+    }
   }
 }

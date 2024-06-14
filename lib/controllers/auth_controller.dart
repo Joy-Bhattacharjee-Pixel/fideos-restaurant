@@ -1,3 +1,9 @@
+import 'dart:developer';
+
+import 'package:fideos_restaurant/models/restaurant.dart';
+import 'package:fideos_restaurant/presentations/auth/register_screen.dart';
+import 'package:fideos_restaurant/utils/cookies.dart';
+import 'package:fideos_restaurant/utils/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -43,6 +49,9 @@ class AuthController extends GetxController {
   // Serving text fields controller for register screen
   final TextEditingController regServingController = TextEditingController();
 
+  // List of serving text editing controllers
+  final RxList<TextEditingController> servings = <TextEditingController>[].obs;
+
   // Open time fields controller for register screen
   final TextEditingController regOpenTimeController = TextEditingController();
 
@@ -54,9 +63,6 @@ class AuthController extends GetxController {
 
   // Register form key
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
-
-// login password obsecurity
-  RxBool loginpasswordObsecured = true.obs;
 
   // List of terms condition options
   List<String> termsconditionoptions = <String>[
@@ -73,12 +79,12 @@ class AuthController extends GetxController {
     "Wednesday",
     "Thursday",
     "Friday",
-    "Satureday"
+    "Saturday"
   ];
 
   // Registration food type
   List foodType = ["Veg", "Non Veg", "Both"];
-  
+
   RxInt servingIndex = 0.obs;
 
   // Registration selected food type
@@ -86,4 +92,52 @@ class AuthController extends GetxController {
 
   // restuarant selected open days
   RxList selectedDays = [].obs;
+
+  // login password obsecurity
+  RxBool loginPasswordObsecured = true.obs;
+
+  // Boolean parameter for login
+  RxBool loadingLogin = false.obs;
+
+  // Add serving text into list
+  addServings() {
+    servings.clear();
+    servings.add(regServingController);
+    servings.refresh();
+  }
+
+  // Restaurant login
+  login({email, password}) async {
+    // Starting loader for login
+    loadingLogin.value = true;
+
+    // Creating restaurat
+    final restaurant = Restaurant(email: email, password: password);
+
+    // Logging using restaurant model login function
+    final loginResponse = await restaurant.login();
+
+    // Checkihg if error is null or not comming from resposne
+    if (loginResponse["error"] != null) {
+      // Showing error maessage
+      FlashManager().show(loginResponse["error"]);
+    }
+
+    // Chrcking if data from resposne comming successfully or not
+    else if (loginResponse["success"] != null) {
+      log(loginResponse["success"].id.toString());
+      // When data comming from resposnse successfully
+      // we will store restaurat id and token comming from resposne inside cokkie manager
+      await CookieManager("id", value: loginResponse["success"].id).save();
+      await CookieManager("token", value: loginResponse["token"]).save();
+
+      // Showing flash message after successfully login 
+      FlashManager().show("Login Successful");
+
+      // Navigating to screen 
+      Get.to(() => const RegisterScreen());
+    }
+    
+    loadingLogin.value =  false;
+  }
 }
