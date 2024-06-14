@@ -64,6 +64,12 @@ class AuthController extends GetxController {
   // Register form key
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
 
+  // forgot password form key
+  final GlobalKey<FormState> forgotPasswordFormKey = GlobalKey<FormState>();
+
+// login password obsecurity
+  RxBool loginpasswordObsecured = true.obs;
+
   // List of terms condition options
   List<String> termsconditionoptions = <String>[
     "Terms of Service",
