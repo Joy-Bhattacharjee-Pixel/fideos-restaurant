@@ -55,6 +55,9 @@ class AuthController extends GetxController {
   // Register form key
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
 
+  // forgot password form key
+  final GlobalKey<FormState> forgotPasswordFormKey = GlobalKey<FormState>();
+
 // login password obsecurity
   RxBool loginpasswordObsecured = true.obs;
 
@@ -78,7 +81,7 @@ class AuthController extends GetxController {
 
   // Registration food type
   List foodType = ["Veg", "Non Veg", "Both"];
-  
+
   RxInt servingIndex = 0.obs;
 
   // Registration selected food type

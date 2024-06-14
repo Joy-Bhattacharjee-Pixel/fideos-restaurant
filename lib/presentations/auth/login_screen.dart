@@ -1,5 +1,6 @@
 import 'package:fideos_restaurant/controllers/auth_controller.dart';
 import 'package:fideos_restaurant/models/app_color.dart';
+import 'package:fideos_restaurant/presentations/auth/forgot_password.dart';
 import 'package:fideos_restaurant/presentations/auth/register_screen.dart';
 import 'package:fideos_restaurant/utils/button.dart';
 import 'package:fideos_restaurant/utils/separator.dart';
@@ -79,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 14),
                 child: GestureDetector(
-                    onTap: () {},
+                    onTap: () => Get.to(() => const ForgotPasswordScreen()),
                     child: Align(
                         alignment: Alignment.centerRight,
                         child: Text("Forgot Password?",
