@@ -97,7 +97,7 @@ class Restaurant {
       final response = await APIClient().post(endpoint, data: body);
       // log(response.data["restaurant"]["id"].toString());
 
-      // Resturning response 
+      // Resturning response
       return {
         "success": Restaurant.fromJson(response.data["restaurant"]),
         "token": response.data["token"]
@@ -106,6 +106,24 @@ class Restaurant {
       return {"error": e.response!.data["error"]};
     }
     // return {};
+  }
+ 
+  // forgot password function for reastaurant
+  forgotpassword() async {
+    try {
+      // Preparinng body object for login
+      final body = {"email": email};
+      // Preparing endpoint
+      const endpoint = "/restaurants/forgotPassword";
+      // Fetching resposne
+      final response = await APIClient().post(endpoint, data: body);
+      // response
+      return {
+        "success": {"id": response.data["id"], "otp": response.data["otp"]}
+      };
+    } on DioException catch (e) {
+      return {"error": e.response!.data["error"]};
+    }
   }
 }
 
