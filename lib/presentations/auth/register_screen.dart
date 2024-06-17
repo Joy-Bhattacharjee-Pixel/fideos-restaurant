@@ -21,6 +21,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _controller = Get.put(AuthController());
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: ColorManager.white,
@@ -157,37 +162,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       // Adding some space
                       const SizedBox(height: 15),
-
-                      // Serving field
-                      Obx(() {
-                        if (_controller.servingIndex.value == 0) {
-                          return TextFieldService(
+                      Obx(() => _controller.servings.isEmpty
+                          ? TextFieldService(
                                   controller: _controller.regServingController,
                                   hint: "Serving")
-                              .show();
-                        } else {
-                          return Column(
-                            children: [
-                              ...List.generate(
-                                  _controller.servings.length,
-                                  (index) => Padding(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      child: TextFieldService(
-                                              controller: _controller
-                                                  .regServingController,
-                                              suffix: Icons.close,
-                                              onTapSuffix: () {
-                                                _controller.servingIndex.value =
-                                                    _controller.servingIndex
-                                                            .value -
-                                                        1;
-                                              },
-                                              hint: "Serving")
-                                          .show()))
-                            ],
-                          );
-                        }
-                      }),
+                              .show()
+                          : Column(
+                              children: [
+                                ...List.generate(
+                                    _controller.servings.length,
+                                    (index) => Padding(
+                                        padding: const EdgeInsets.only(top: 10),
+                                        child: TextFieldService(
+                                                controller: _controller
+                                                    .servings[index]
+                                                    .servingController,
+                                                suffix: _controller
+                                                            .servings.length ==
+                                                        1
+                                                    ? null
+                                                    : Icons.close,
+                                                onTapSuffix: () {
+                                                  setState(() {
+                                                    _controller
+                                                        .removeServings(index);
+                                                  });
+                                                  log(_controller
+                                                      .servings.length
+                                                      .toString());
+                                                },
+                                                hint: "Serving")
+                                            .show())),
+                              ],
+                            )),
 
                       // Adding some space
                       const SizedBox(height: 10),
@@ -197,9 +204,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           alignment: Alignment.centerRight,
                           child: OutlinedButton(
                               onPressed: () {
-                                _controller.servingIndex.value =
-                                    _controller.servingIndex.value + 1;
-                                _controller.addServings();
+                                setState(() {
+                                  _controller.addServings;
+                                });
+                                log(_controller.servings.length.toString());
                               },
                               child: const Icon(Icons.add))),
 
@@ -360,24 +368,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // Adding some space
                       const SizedBox(height: 15),
 
-                      //  delivery switch button
-                      Row(children: [
-                        const Text("Delivery",
-                            style: TextStyle(fontSize: 15, color: Colors.grey)),
-                        CupertinoSwitch(
-                            activeColor: ColorManager.primary,
-                            value: _controller.switchValue.value,
-                            onChanged: (value) {
-                              setState(() {
-                                _controller.switchValue.value = value;
-                              });
-                            })
-                      ]),
+                      //  Delivery switch button
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text("Delivery",
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.grey)),
+                            CupertinoSwitch(
+                                activeColor: ColorManager.primary,
+                                value: _controller.deliverySwitch.value,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _controller.deliverySwitch.value = value;
+                                  });
+                                })
+                          ]),
 
-                      //  when switch value is on
-                      _controller.switchValue.value
+                      //  When switch value is on
+                      _controller.deliverySwitch.value
                           ? Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
+                              padding:
+                                  const EdgeInsets.only(top: 10.0, bottom: 10),
                               child: Column(children: [
                                 // Delivery fee field
                                 TextFieldService(
@@ -401,14 +413,44 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                                 // Estimated Time  field
                                 TextFieldService(
-                                        controller:
-                                            _controller.estimatedtimeController,
+                                        controller: _controller
+                                            .deliveryEstimatedtimeController,
                                         hint: "Estimated Time")
                                     .show()
                               ]))
                           :
                           //  when switch value is of
-                          SizedBox(),
+                          const SizedBox(),
+
+                      // Pick up switch button
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text("Pick Up",
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.grey)),
+                            CupertinoSwitch(
+                                activeColor: ColorManager.primary,
+                                value: _controller.pickUpSwitch.value,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _controller.pickUpSwitch.value = value;
+                                  });
+                                })
+                          ]),
+
+                      // If pick up is enable then show estimated time text field
+                      _controller.pickUpSwitch.value == true
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: TextFieldService(
+                                      controller: _controller
+                                          .pickupEstimatedtimeController,
+                                      hint: "Estimated Time")
+                                  .show(),
+                            )
+                          : const SizedBox(),
+
                       // Adding some space
                       const SizedBox(
                         height: 20,

@@ -52,7 +52,7 @@ class AuthController extends GetxController {
   final TextEditingController regServingController = TextEditingController();
 
   // List of serving text editing controllers
-  final RxList<TextEditingController> servings = <TextEditingController>[].obs;
+  // final RxList<TextEditingController> servings = <TextEditingController>[].obs;
 
   // Open time fields controller for register screen
   final TextEditingController regOpenTimeController = TextEditingController();
@@ -66,8 +66,12 @@ class AuthController extends GetxController {
   // Minimum order fields controller for register screen
   final TextEditingController minimumorderController = TextEditingController();
 
-  // Estimated time fields controller for register screen
-  final TextEditingController estimatedtimeController = TextEditingController();
+  // Delivery estimated time fields controller for register screen
+  final TextEditingController deliveryEstimatedtimeController = TextEditingController();
+
+  
+  // Pick up estimated time fields controller for register screen
+  final TextEditingController pickupEstimatedtimeController = TextEditingController();
 
   // otp fields controller for register screen
   final TextEditingController otpController = TextEditingController();
@@ -155,16 +159,33 @@ class AuthController extends GetxController {
 
 // Boolean parameter for switch
   RxBool switchValue = false.obs;
+// Boolean parameter for delivery switch
+  RxBool deliverySwitch = false.obs;
+
+  // Pick up switch value
+  RxBool pickUpSwitch =  false.obs;
 
   RxInt sentOtp = 0.obs;
   RxString sentUserId = "".obs;
 
+  // List of serving model 
+  RxList<ServingFields> servings = <ServingFields>[].obs;
+
   // Add serving text into list
-  addServings() {
-    servings.clear();
-    servings.add(regServingController);
+  get addServings async{
+    servings.add(ServingFields(servingController: TextEditingController(), flyingFromFocus: FocusNode()));
     servings.refresh();
   }
+
+    // REMOVING TEXT FORM FIELD MODEL INTO THE ARRAY
+  removeServings(index) async {
+    // FLIGHT TEXT CONTROLLERS ADD
+    servings.removeAt(index);
+
+    // REFRESHING TEXT EDITING CONTROLLERS
+    servings.refresh();
+  }
+
 
   // Restaurant login
   login({email, password}) async {
@@ -277,4 +298,13 @@ class AuthController extends GetxController {
     // Stop loader for reset password
     resetPasswordProcessing.value = false;
   }
+}
+
+// Servings field model
+class ServingFields {
+  TextEditingController servingController;
+  FocusNode flyingFromFocus;
+
+  ServingFields(
+      {required this.servingController, required this.flyingFromFocus});
 }
