@@ -58,6 +58,15 @@ class AuthController extends GetxController {
   // Close time fields controller for register screen
   final TextEditingController regCloseTimeController = TextEditingController();
 
+  // Delivery fee fields controller for register screen
+  final TextEditingController deliveryfeeController = TextEditingController();
+
+  // Minimum order fields controller for register screen
+  final TextEditingController minimumorderController = TextEditingController();
+
+  // Estimated time fields controller for register screen
+  final TextEditingController estimatedtimeController = TextEditingController();
+
   // Login form key
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
@@ -105,6 +114,15 @@ class AuthController extends GetxController {
   // Boolean parameter for login
   RxBool loadingLogin = false.obs;
 
+  // Boolean parameter for forgot password
+  RxBool loadingforgotPassword = false.obs;
+
+// boolean parameter for switch
+  RxBool switchValue = false.obs;
+
+  RxInt sentOtp = 0.obs;
+  RxString sentUserId = "".obs;
+
   // Add serving text into list
   addServings() {
     servings.clear();
@@ -137,13 +155,42 @@ class AuthController extends GetxController {
       await CookieManager("id", value: loginResponse["success"].id).save();
       await CookieManager("token", value: loginResponse["token"]).save();
 
-      // Showing flash message after successfully login 
+      // Showing flash message after successfully login
       FlashManager().show("Login Successful");
 
-      // Navigating to screen 
+      // Navigating to screen
       Get.to(() => const RegisterScreen());
     }
-    
-    loadingLogin.value =  false;
+
+    loadingLogin.value = false;
+  }
+
+// forgot password
+  forgotPassword({email}) async {
+    // Starting loader for forgot password
+    loadingforgotPassword.value = true;
+
+    // Creating restaurat
+    final restaurant = Restaurant(email: email);
+
+    final forgotpasswordResponse = await restaurant.forgotpassword();
+    // Checkihg if error is null or not comming from resposne
+    if (forgotpasswordResponse["error"] != null) {
+      // Showing error maessage
+      FlashManager().show(forgotpasswordResponse["error"]);
+    }
+    // Checking if data from resposne comming successfully or not
+    else if (forgotpasswordResponse["success"] != null) {
+      // Showing error maessage
+      FlashManager().show("OTP sent successfully to Email");
+       // When data comming from resposnse successfully
+        // we will store forgot password id and otp comming from resposne inside variable
+      sentOtp.value = forgotpasswordResponse["success"]["otp"];
+      sentUserId.value = forgotpasswordResponse["success"]["id"];
+      // navigate get to
+      Get.to(() => Container());
+    }
+    // Stop loader for forgot password
+    loadingforgotPassword.value = false;
   }
 }

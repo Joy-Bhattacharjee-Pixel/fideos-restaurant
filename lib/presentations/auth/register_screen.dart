@@ -5,6 +5,7 @@ import 'package:fideos_restaurant/models/app_color.dart';
 import 'package:fideos_restaurant/utils/button.dart';
 import 'package:fideos_restaurant/utils/separator.dart';
 import 'package:fideos_restaurant/utils/text_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -198,7 +199,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               onPressed: () {
                                 _controller.servingIndex.value =
                                     _controller.servingIndex.value + 1;
-                                // _controller.addServings();
+                                _controller.addServings();
                               },
                               child: const Icon(Icons.add))),
 
@@ -350,6 +351,64 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                     ? ColorManager.primary
                                                     : ColorManager.black)))));
                               })),
+                      // Adding some space
+                      const SizedBox(height: 15),
+
+                      // Food type title seperator
+                      Seperator(text: "Delivery", horizontalPadding: 0).show(),
+
+                      // Adding some space
+                      const SizedBox(height: 15),
+
+                      //  delivery switch button
+                      Row(children: [
+                        const Text("Delivery",
+                            style: TextStyle(fontSize: 15, color: Colors.grey)),
+                        CupertinoSwitch(
+                            activeColor: ColorManager.primary,
+                            value: _controller.switchValue.value,
+                            onChanged: (value) {
+                              setState(() {
+                                _controller.switchValue.value = value;
+                              });
+                            })
+                      ]),
+
+                      //  when switch value is on
+                      _controller.switchValue.value
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Column(children: [
+                                // Delivery fee field
+                                TextFieldService(
+                                        controller:
+                                            _controller.deliveryfeeController,
+                                        hint: "Delivery fee")
+                                    .show(),
+
+                                // Adding some space
+                                const SizedBox(height: 10),
+
+                                // Minimum order  field
+                                TextFieldService(
+                                        controller:
+                                            _controller.minimumorderController,
+                                        hint: "Minimum order")
+                                    .show(),
+
+                                // Adding some space
+                                const SizedBox(height: 10),
+
+                                // Estimated Time  field
+                                TextFieldService(
+                                        controller:
+                                            _controller.estimatedtimeController,
+                                        hint: "Estimated Time")
+                                    .show()
+                              ]))
+                          :
+                          //  when switch value is of
+                          SizedBox(),
                       // Adding some space
                       const SizedBox(
                         height: 20,
