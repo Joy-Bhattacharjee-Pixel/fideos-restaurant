@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:fideos_restaurant/models/restaurant.dart';
 import 'package:fideos_restaurant/presentations/auth/register_screen.dart';
 import 'package:fideos_restaurant/utils/cookies.dart';
