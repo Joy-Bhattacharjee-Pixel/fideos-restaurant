@@ -1,6 +1,9 @@
 import 'dart:developer';
 import 'package:fideos_restaurant/models/restaurant.dart';
+import 'package:fideos_restaurant/presentations/auth/login_screen.dart';
 import 'package:fideos_restaurant/presentations/auth/register_screen.dart';
+import 'package:fideos_restaurant/presentations/auth/reset_password.dart';
+import 'package:fideos_restaurant/presentations/auth/verify_otp.dart';
 import 'package:fideos_restaurant/utils/cookies.dart';
 import 'package:fideos_restaurant/utils/flash.dart';
 import 'package:flutter/material.dart';
@@ -66,17 +69,45 @@ class AuthController extends GetxController {
   // Estimated time fields controller for register screen
   final TextEditingController estimatedtimeController = TextEditingController();
 
+  // otp fields controller for register screen
+  final TextEditingController otpController = TextEditingController();
+
+    // Email verify otp fields controller for register screen
+  final TextEditingController emailverifyotpController = TextEditingController();
+
+  //reset password text field controller for register screen
+  final TextEditingController resetPasswordController = TextEditingController();
+
+  //reset confirm password controller text field controller for register screen
+  final TextEditingController resetConfirmPasswordController =
+      TextEditingController();
+
   // Login form key
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
   // Register form key
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
 
-  // forgot password form key
+  // Forgot password form key
   final GlobalKey<FormState> forgotPasswordFormKey = GlobalKey<FormState>();
 
-// login password obsecurity
+  // Otp form key
+  final GlobalKey<FormState> otpFieldFormKey = GlobalKey<FormState>();
+
+  //Reset Password FormKey
+  final GlobalKey<FormState> resetPasswordFormKey = GlobalKey<FormState>();
+
+    //Email verify FormKey
+  final GlobalKey<FormState> emailverifyFormKey = GlobalKey<FormState>();
+
+// Login password obsecurity
   RxBool loginpasswordObsecured = true.obs;
+
+// Reset password obsecurity
+  RxBool resetPasswordObsecured = true.obs;
+
+  // Reset confirm password obsecurity
+  RxBool resetConfirmPasswordObsecured = true.obs;
 
   // List of terms condition options
   List<String> termsconditionoptions = <String>[
@@ -104,10 +135,10 @@ class AuthController extends GetxController {
   // Registration selected food type
   Rx<String> selectedFood = "Veg".obs;
 
-  // restuarant selected open days
+  // Restuarant selected open days
   RxList selectedDays = [].obs;
 
-  // login password obsecurity
+  // Login password obsecurity
   RxBool loginPasswordObsecured = true.obs;
 
   // Boolean parameter for login
@@ -116,7 +147,13 @@ class AuthController extends GetxController {
   // Boolean parameter for forgot password
   RxBool loadingforgotPassword = false.obs;
 
-// boolean parameter for switch
+  // Boolean parameter otp verify
+  RxBool otpFieldProcessing = false.obs;
+
+  // Boolean parameter reset password
+  RxBool resetPasswordProcessing = false.obs;
+
+// Boolean parameter for switch
   RxBool switchValue = false.obs;
 
   RxInt sentOtp = 0.obs;
@@ -164,7 +201,7 @@ class AuthController extends GetxController {
     loadingLogin.value = false;
   }
 
-// forgot password
+  // forgot password
   forgotPassword({email}) async {
     // Starting loader for forgot password
     loadingforgotPassword.value = true;
@@ -182,14 +219,62 @@ class AuthController extends GetxController {
     else if (forgotpasswordResponse["success"] != null) {
       // Showing error maessage
       FlashManager().show("OTP sent successfully to Email");
-       // When data comming from resposnse successfully
-        // we will store forgot password id and otp comming from resposne inside variable
+      // When data comming from resposnse successfully
+      // we will store forgot password id and otp comming from resposne inside variable
       sentOtp.value = forgotpasswordResponse["success"]["otp"];
       sentUserId.value = forgotpasswordResponse["success"]["id"];
       // navigate get to
-      Get.to(() => Container());
+      Get.to(() => const VerifyOtpScreen());
     }
     // Stop loader for forgot password
     loadingforgotPassword.value = false;
+  }
+
+// Otp verify
+  verifyOtp({id, otp, enteredOtp}) async {
+    // Starting loader for otp verify
+    otpFieldProcessing.value = true;
+
+    final restaurant = Restaurant();
+
+    final otpverifyresponse =
+        await restaurant.verifyOtp(otp: otp, enteredOtp: enteredOtp);
+    // Checkihg if error is null or not comming from resposne
+    if (otpverifyresponse["error"] != null) {
+      FlashManager().show(otpverifyresponse["error"]);
+      log("error");
+    }
+    // Checking if otp resposne comming successfully or not
+    if (otpverifyresponse["success"] != null) {
+      FlashManager().show("OTP verified successfully");
+      log("successfully");
+      Get.to(() => const ResetPasswordScreen());
+    }
+// Stop loader for otp varify
+    otpFieldProcessing.value = false;
+  }
+
+// Reset password
+  resetPassword({id, password}) async {
+    // Start loader for reset password
+    resetPasswordProcessing.value = true;
+    
+    // Creating restaurat
+    final restaurant = Restaurant();
+
+    final response = await restaurant.resetPassword(password: password, id: id);
+  // If response error
+    if (response["error"] != null) {
+      FlashManager().show(response["error"]);
+    }
+    // If res
+    if (response["success"] != null) {
+      FlashManager().show("Password updated successfully");
+      
+    // Navigate to loginscreen
+      Get.off(() => const LoginScreen());
+    }
+    // Stop loader for reset password
+    resetPasswordProcessing.value = false;
   }
 }

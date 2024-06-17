@@ -39,6 +39,7 @@ dependencies:
   shared_preferences: 
   flutter_vector_icons: 
   dio: 
+  pinput: ^5.0.0
 
 dev_dependencies:
   flutter_test:

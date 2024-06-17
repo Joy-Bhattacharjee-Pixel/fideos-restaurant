@@ -1,6 +1,8 @@
 import 'package:fideos_restaurant/models/app_color.dart';
+import 'package:fideos_restaurant/presentations/auth/email_verify_screen.dart';
 import 'package:fideos_restaurant/presentations/auth/login_screen.dart';
 import 'package:fideos_restaurant/presentations/auth/register_screen.dart';
+import 'package:fideos_restaurant/presentations/auth/reset_password.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +24,6 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
             fontFamily: "Lexend",
             primaryColor: ColorManager.primary),
-        home: const LoginScreen());
+        home: const EmailVerifyScreen());
   }
 }

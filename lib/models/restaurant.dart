@@ -107,7 +107,7 @@ class Restaurant {
     }
     // return {};
   }
- 
+
   // forgot password function for reastaurant
   forgotpassword() async {
     try {
@@ -123,6 +123,35 @@ class Restaurant {
       };
     } on DioException catch (e) {
       return {"error": e.response!.data["error"]};
+    }
+  }
+
+  // Verify otp function for restaurant
+  verifyOtp({required String otp, required String enteredOtp}) async {
+    try {
+      if (otp == enteredOtp) {
+        return {"success": "OTP matched successfully"};
+      } else {
+        return {"error": "OTP does not match"};
+      }
+    } catch (e) {
+      return {"error": e.toString()};
+    }
+  }
+
+// Reset password function for restaurant
+  resetPassword({required String password, required String id}) async {
+    try {
+      // Preparinng body object for login
+      final body = {"password": password, "id": id};
+        // Preparinng end point
+      const endpoint = "/restaurants/reset-password";
+      // Fetching resposne
+      final Response response = await APIClient().post(endpoint, data: body);
+    //  If response success
+      return {"success": response.data["success"]};
+    } catch (e) {
+      return {"error": e.toString()};
     }
   }
 }
