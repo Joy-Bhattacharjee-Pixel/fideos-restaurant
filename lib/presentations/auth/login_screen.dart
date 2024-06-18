@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 10),
 
             // Restaurat password text field
-            Padding(
+            Obx(() => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: TextFieldService(
                     controller: _controller.loginPasswordController,
@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ? Feather.eye
                         : Feather.eye_off,
                     validator: (password) =>
-                        _passwordValidator(password: password)).show()),
+                        _passwordValidator(password: password)).show())),
 
             // forgot password option
             Padding(

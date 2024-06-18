@@ -24,6 +24,6 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
             fontFamily: "Lexend",
             primaryColor: ColorManager.primary),
-        home: const EmailVerifyScreen());
+        home: const RegisterScreen());
   }
 }
