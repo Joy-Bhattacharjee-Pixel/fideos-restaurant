@@ -67,17 +67,19 @@ class AuthController extends GetxController {
   final TextEditingController minimumorderController = TextEditingController();
 
   // Delivery estimated time fields controller for register screen
-  final TextEditingController deliveryEstimatedtimeController = TextEditingController();
+  final TextEditingController deliveryEstimatedtimeController =
+      TextEditingController();
 
-  
   // Pick up estimated time fields controller for register screen
-  final TextEditingController pickupEstimatedtimeController = TextEditingController();
+  final TextEditingController pickupEstimatedtimeController =
+      TextEditingController();
 
   // otp fields controller for register screen
   final TextEditingController otpController = TextEditingController();
 
-    // Email verify otp fields controller for register screen
-  final TextEditingController emailverifyotpController = TextEditingController();
+  // Email verify otp fields controller for register screen
+  final TextEditingController emailverifyotpController =
+      TextEditingController();
 
   //reset password text field controller for register screen
   final TextEditingController resetPasswordController = TextEditingController();
@@ -101,7 +103,7 @@ class AuthController extends GetxController {
   //Reset Password FormKey
   final GlobalKey<FormState> resetPasswordFormKey = GlobalKey<FormState>();
 
-    //Email verify FormKey
+  //Email verify FormKey
   final GlobalKey<FormState> emailverifyFormKey = GlobalKey<FormState>();
 
 // Login password obsecurity
@@ -163,21 +165,23 @@ class AuthController extends GetxController {
   RxBool deliverySwitch = false.obs;
 
   // Pick up switch value
-  RxBool pickUpSwitch =  false.obs;
+  RxBool pickUpSwitch = false.obs;
 
   RxInt sentOtp = 0.obs;
   RxString sentUserId = "".obs;
 
-  // List of serving model 
+  // List of serving model
   RxList<ServingFields> servings = <ServingFields>[].obs;
 
   // Add serving text into list
-  get addServings async{
-    servings.add(ServingFields(servingController: TextEditingController(), flyingFromFocus: FocusNode()));
+  get addServings async {
+    servings.add(ServingFields(
+        servingController: TextEditingController(),
+        flyingFromFocus: FocusNode()));
     servings.refresh();
   }
 
-    // REMOVING TEXT FORM FIELD MODEL INTO THE ARRAY
+  // REMOVING TEXT FORM FIELD MODEL INTO THE ARRAY
   removeServings(index) async {
     // FLIGHT TEXT CONTROLLERS ADD
     servings.removeAt(index);
@@ -185,7 +189,6 @@ class AuthController extends GetxController {
     // REFRESHING TEXT EDITING CONTROLLERS
     servings.refresh();
   }
-
 
   // Restaurant login
   login({email, password}) async {
@@ -218,7 +221,7 @@ class AuthController extends GetxController {
       // Navigating to screen
       Get.to(() => const RegisterScreen());
     }
-
+    // Stop loader for login
     loadingLogin.value = false;
   }
 
@@ -279,20 +282,20 @@ class AuthController extends GetxController {
   resetPassword({id, password}) async {
     // Start loader for reset password
     resetPasswordProcessing.value = true;
-    
+
     // Creating restaurat
     final restaurant = Restaurant();
 
     final response = await restaurant.resetPassword(password: password, id: id);
-  // If response error
+    // If response error
     if (response["error"] != null) {
       FlashManager().show(response["error"]);
     }
     // If res
     if (response["success"] != null) {
       FlashManager().show("Password updated successfully");
-      
-    // Navigate to loginscreen
+
+      // Navigate to loginscreen
       Get.off(() => const LoginScreen());
     }
     // Stop loader for reset password
