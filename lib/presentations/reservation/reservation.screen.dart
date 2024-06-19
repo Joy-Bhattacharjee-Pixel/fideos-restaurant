@@ -22,6 +22,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
           style: TextStyle(
               fontSize: 21, color: Colors.black, fontWeight: FontWeight.bold)),
 
+
       // Sub title
       const Text("Saltlake Sector 3, Bidhannagar, Kolkata",
           textAlign: TextAlign.center,
