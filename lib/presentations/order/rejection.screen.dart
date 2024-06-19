@@ -32,7 +32,6 @@ class _RejectionScreenState extends State<RejectionScreen> {
               const Text("Reject Order-123456",
                   style: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold)),
-                      
               Text("Please provide a proper reason to reject order ",
                   softWrap: true,
                   style: TextStyle(

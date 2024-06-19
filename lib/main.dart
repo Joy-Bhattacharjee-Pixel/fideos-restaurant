@@ -1,6 +1,5 @@
 import 'package:fideos_restaurant/models/app_color.dart';
-import 'package:fideos_restaurant/presentations/auth/email_verify_screen.dart';
-import 'package:fideos_restaurant/presentations/reservation/reservation.screen.dart';
+import 'package:fideos_restaurant/presentations/reservation/reservation.details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +21,7 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
             fontFamily: "Lexend",
             primaryColor: ColorManager.primary),
-        home: const ReservationScreen());
+        home: const ReservationDetails());
   }
 }
+

@@ -1,13 +1,10 @@
 import 'dart:developer';
-
-import 'package:dio/dio.dart';
 import 'package:fideos_restaurant/models/restaurant.dart';
 import 'package:fideos_restaurant/presentations/auth/email_verify_screen.dart';
 import 'package:fideos_restaurant/presentations/auth/login_screen.dart';
 import 'package:fideos_restaurant/presentations/auth/register_screen.dart';
 import 'package:fideos_restaurant/presentations/auth/reset_password.dart';
 import 'package:fideos_restaurant/presentations/auth/verify_otp.dart';
-import 'package:fideos_restaurant/service.dart';
 import 'package:fideos_restaurant/utils/cookies.dart';
 import 'package:fideos_restaurant/utils/flash.dart';
 import 'package:flutter/material.dart';
@@ -85,19 +82,38 @@ class AuthController extends GetxController {
   final TextEditingController pickupEstimatedtimeController =
       TextEditingController();
 
-  // otp fields controller for register screen
+  // Otp fields controller for register screen
   final TextEditingController otpController = TextEditingController();
 
   // Email verify otp fields controller for register screen
   final TextEditingController emailverifyotpController =
       TextEditingController();
 
-  //reset password text field controller for register screen
+  //Reset password text field controller for register screen
   final TextEditingController resetPasswordController = TextEditingController();
 
-  //reset confirm password controller text field controller for register screen
+  //Reset confirm password controller text field controller for register screen
   final TextEditingController resetConfirmPasswordController =
       TextEditingController();
+
+//Product Name text field controller for register screen
+  final TextEditingController productNameController = TextEditingController();
+
+// Product detailed reason to reject field controller for register screen
+  final TextEditingController reasonRejectController = TextEditingController();
+
+  // Product new tag field controller for register screen
+  final TextEditingController newTagController = TextEditingController();
+
+  // Product add new menu field controller for register screen
+  final TextEditingController newMenuController = TextEditingController();
+
+    // Product Offer price field controller for register screen
+  final TextEditingController offerPriceController = TextEditingController();
+
+
+    // Product actual price field controller for register screen
+  final TextEditingController actualPriceController = TextEditingController();
 
   // Login form key
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
