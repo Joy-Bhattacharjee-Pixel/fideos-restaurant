@@ -1,8 +1,5 @@
 import 'package:fideos_restaurant/models/app_color.dart';
-import 'package:fideos_restaurant/presentations/auth/email_verify_screen.dart';
-import 'package:fideos_restaurant/presentations/auth/login_screen.dart';
-import 'package:fideos_restaurant/presentations/auth/register_screen.dart';
-import 'package:fideos_restaurant/presentations/auth/reset_password.dart';
+import 'package:fideos_restaurant/presentations/reservation/reservation.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,12 +15,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Fideos Restaurant App',
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: ColorManager.primary),
             useMaterial3: true,
             fontFamily: "Lexend",
             primaryColor: ColorManager.primary),
-        home: const RegisterScreen());
+        home: const ReservationScreen());
   }
 }

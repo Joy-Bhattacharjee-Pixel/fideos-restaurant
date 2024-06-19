@@ -244,7 +244,7 @@ class AuthController extends GetxController {
       // Navigating to screen
       Get.to(() => const RegisterScreen());
     }
-
+    // Stop loader for login
     loadingLogin.value = false;
   }
 
