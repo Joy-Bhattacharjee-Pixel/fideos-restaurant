@@ -50,7 +50,6 @@ class _OrderDetailsState extends State<OrderDetails> {
       const SizedBox(height: 10),
 
       // Customer name
-
       const Text("Joy Bhattacherjee",
           softWrap: true,
           style: TextStyle(
@@ -69,7 +68,6 @@ class _OrderDetailsState extends State<OrderDetails> {
       const SizedBox(height: 15),
 
       // Delivery partner status
-
       const Text("Delivery Partner Waiting",
           softWrap: true,
           style: TextStyle(

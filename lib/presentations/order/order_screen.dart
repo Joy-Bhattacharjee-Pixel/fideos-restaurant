@@ -17,19 +17,19 @@ class _OrderScreenState extends State<OrderScreen> {
     return Scaffold(
         body: SafeArea(
             child: Column(children: [
-      // Title
+      // Product title
       const Text("Domino's Pizza",
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 21, fontWeight: FontWeight.bold, color: Colors.black)),
 
-      // Screen sub title
+      // Sub title
       const Text("Saltlake Sector 3, Bidhannagar, Kolkata",
           textAlign: TextAlign.center,
           softWrap: true,
           style: TextStyle(fontSize: 13, color: Colors.black)),
 
-      // Giving some space
+      // Adding some space
       const SizedBox(height: 20),
 
       // All order list
@@ -42,14 +42,21 @@ class _OrderScreenState extends State<OrderScreen> {
                         Get.to(() => const OrderDetails());
                       },
                       child: Container(
+                          // Padding for the container
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 5),
+
+                          // Margin for the container
                           margin: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 5),
+
+                          // Decocation of container
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5.0),
                               border: Border.all(
                                   color: Colors.grey.withOpacity(0.2))),
+
+                          // Child widget for the container
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,7 +112,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                                           : Colors.green))))
                                     ]),
 
-                                // Order items
+                                // Ordered items
                                 const Text(
                                     "Kadai Panner, Chicken Biriyani and..",
                                     style: TextStyle(
@@ -114,7 +121,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                 // Giving some space
                                 const SizedBox(height: 5),
 
-                                // Order date
+                                // Ordered date
                                 const Text("Ordered On 6.08 p.m.",
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 13)),
@@ -132,28 +139,34 @@ class _OrderScreenState extends State<OrderScreen> {
     ])));
   }
 
-  // reject dialog
+  // Reject dialog
   Widget get rejectDialog => SimpleDialog(
           alignment: Alignment.center,
           insetPadding: const EdgeInsets.all(8),
           contentPadding: const EdgeInsets.all(10),
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.white,
-          // reject title
+          // Reject title
           title: const Text("Are you sure to reject Order-1234567?",
               style: TextStyle(color: Colors.black, fontSize: 14)),
+
+          // Padding for title
           titlePadding: const EdgeInsets.only(left: 40, right: 40, top: 15),
+
+          // Shape of dialog
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+
+          // Children of dialog container
           children: [
-            // reject description
+            // Reject description
             const Text(
                 "This will require to submit a proper reject reason and if the reason does not stand back you will face a penalty according to the order value.",
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black, fontSize: 12)),
 
             // back to order button
-            unConstrainBox(
+            _unConstrainBox(
                 text: "Go Back to Order",
                 color: Colors.green,
                 width: Get.width * 0.5,
@@ -162,7 +175,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 }),
 
             // reject button
-            unConstrainBox(
+            _unConstrainBox(
                 text: "I have Understand & Reject this Order",
                 color: ColorManager.primary,
                 width: Get.width * 0.8,
@@ -173,7 +186,7 @@ class _OrderScreenState extends State<OrderScreen> {
           ]);
 
   // unconstrain box
-  Widget unConstrainBox(
+  Widget _unConstrainBox(
           {required String text,
           Color? color,
           double? width,
@@ -195,6 +208,6 @@ class _OrderScreenState extends State<OrderScreen> {
                       Text(text,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              color: color ??Colors.black,
+                              color: color ?? Colors.black,
                               fontWeight: FontWeight.normal)))));
 }

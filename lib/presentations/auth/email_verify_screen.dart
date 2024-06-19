@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:fideos_restaurant/controllers/auth_controller.dart';
-import 'package:fideos_restaurant/models/app_color.dart';
 import 'package:fideos_restaurant/utils/button.dart';
 import 'package:fideos_restaurant/utils/loader.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +13,8 @@ class EmailVerifyScreen extends StatefulWidget {
 }
 
 class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
-  //importing authcontroller
+
+  //Importing authcontroller
   final AuthController _controller = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
@@ -25,22 +23,22 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
             key: _controller.emailverifyFormKey,
             child: SingleChildScrollView(
                 child: Column(children: [
-              // app icon
+              // App icon
               Image.asset("assets/auth_screen.png", width: Get.width),
 
-              // give space
+              // Give space
               const SizedBox(height: 30),
 
-              //  title
+              //  Title
               const Center(
                   child: Text("Verify Your Email",
                       style: TextStyle(
                           fontSize: 16, fontWeight: FontWeight.w500))),
 
-              // give space
+              // Give space
               const SizedBox(height: 3),
 
-              //  subtitle
+              //  Subtitle
               const Center(
                   child: Text(
                       "Please enter the 4 digits OTP we sent in your email",
@@ -48,14 +46,14 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
                           fontSize: 13,
                           color: Colors.grey,
                           fontWeight: FontWeight.w500))),
-              // give space
+              // Give space
               const SizedBox(height: 15),
 
-              // verify otp fields
+              // Verify otp fields
               Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(children: [
-                    // otp text field
+                    // Otp text field
                     Pinput(
                         controller: _controller.emailverifyotpController,
                         validator: (otp) {
@@ -67,10 +65,10 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
                           return null;
                         }),
 
-                    // give space
+                    // Give space
                     const SizedBox(height: 20),
 
-                    // verify email button
+                    // Verify email button
                     Obx(() => _controller.emailVerification.value == true
                         ? Loader().show()
                         : ButtonManager(
@@ -78,7 +76,7 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
                                 text: "Verify Email")
                             .elevated()),
 
-                    // give space
+                    // Give space
                     const SizedBox(height: 20),
 
                     // // back to login
@@ -97,7 +95,7 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
                     //               color: ColorManager.primary, fontSize: 13.5)))
                     // ]),
 
-                    // give space
+                    // Give space
                     const SizedBox(height: 10)
                   ]))
             ]))));
