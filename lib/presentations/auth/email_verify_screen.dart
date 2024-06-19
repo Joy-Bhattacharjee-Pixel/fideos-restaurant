@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:fideos_restaurant/controllers/auth_controller.dart';
 import 'package:fideos_restaurant/models/app_color.dart';
 import 'package:fideos_restaurant/utils/button.dart';
+import 'package:fideos_restaurant/utils/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
@@ -14,12 +17,12 @@ class EmailVerifyScreen extends StatefulWidget {
 
 class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
   //importing authcontroller
-  final AuthController _authController = Get.put(AuthController());
+  final AuthController _controller = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Form(
-            key: _authController.emailverifyFormKey,
+            key: _controller.emailverifyFormKey,
             child: SingleChildScrollView(
                 child: Column(children: [
               // app icon
@@ -54,7 +57,7 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
                   child: Column(children: [
                     // otp text field
                     Pinput(
-                        controller: _authController.emailverifyotpController,
+                        controller: _controller.emailverifyotpController,
                         validator: (otp) {
                           if (otp == null || otp.isEmpty) {
                             return "OTP cannot be empty";
@@ -68,31 +71,46 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
                     const SizedBox(height: 20),
 
                     // verify email button
-                    ButtonManager(onPressed: () {}, text: "Verify OTP")
-                        .elevated(),
+                    Obx(() => _controller.emailVerification.value == true
+                        ? Loader().show()
+                        : ButtonManager(
+                                onPressed: () => _verifyEmail(),
+                                text: "Verify Email")
+                            .elevated()),
 
                     // give space
                     const SizedBox(height: 20),
 
-                    // back to login
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      const Text("Lost OTP?",
-                          style:
-                              TextStyle(color: Colors.black, fontSize: 13.5)),
+                    // // back to login
+                    // Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    //   const Text("Lost OTP?",
+                    //       style:
+                    //           TextStyle(color: Colors.black, fontSize: 13.5)),
 
-                      // give space
-                      const SizedBox(width: 5),
+                    //   // give space
+                    //   const SizedBox(width: 5),
 
-                      InkWell(
-                          onTap: () {},
-                          child: Text("Resend",
-                              style: TextStyle(
-                                  color: ColorManager.primary, fontSize: 13.5)))
-                    ]),
+                    //   InkWell(
+                    //       onTap: () {},
+                    //       child: Text("Resend",
+                    //           style: TextStyle(
+                    //               color: ColorManager.primary, fontSize: 13.5)))
+                    // ]),
 
                     // give space
                     const SizedBox(height: 10)
                   ]))
             ]))));
+  }
+
+  // email verify
+  _verifyEmail() {
+    FocusScope.of(context).unfocus();
+    if (_controller.emailverifyFormKey.currentState!.validate()) {
+      _controller.emailverifyFormKey.currentState!.save();
+      _controller.verifyEmail(
+          otp: _controller.emailverifyotpController.text.trim(),
+          encryptedData: _controller.otpVerificationData.value);
+    }
   }
 }

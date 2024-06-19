@@ -21,6 +21,6 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
             fontFamily: "Lexend",
             primaryColor: ColorManager.primary),
-        home: const ReservationScreen());
+        home: const EmailVerifyScreen());
   }
 }

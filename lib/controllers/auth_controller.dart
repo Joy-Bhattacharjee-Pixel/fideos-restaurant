@@ -1,9 +1,13 @@
 import 'dart:developer';
+
+import 'package:dio/dio.dart';
 import 'package:fideos_restaurant/models/restaurant.dart';
+import 'package:fideos_restaurant/presentations/auth/email_verify_screen.dart';
 import 'package:fideos_restaurant/presentations/auth/login_screen.dart';
 import 'package:fideos_restaurant/presentations/auth/register_screen.dart';
 import 'package:fideos_restaurant/presentations/auth/reset_password.dart';
 import 'package:fideos_restaurant/presentations/auth/verify_otp.dart';
+import 'package:fideos_restaurant/service.dart';
 import 'package:fideos_restaurant/utils/cookies.dart';
 import 'package:fideos_restaurant/utils/flash.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +23,10 @@ class AuthController extends GetxController {
   // Name text field controller for register screen
   final TextEditingController regNameController = TextEditingController();
 
+  // Name text field controller for register screen
+  final TextEditingController regDescriptionController =
+      TextEditingController();
+
   // Email text field controller for register screen
   final TextEditingController regEmailController = TextEditingController();
 
@@ -31,6 +39,9 @@ class AuthController extends GetxController {
   // Confirm password text field controller for register screen
   final TextEditingController regConfirmPasswordController =
       TextEditingController();
+
+  // Restaurant website text field controller for register screen
+  final TextEditingController regWebsiteController = TextEditingController();
 
   // Full Address text field controller for register screen
   final TextEditingController regFullAddressController =
@@ -106,15 +117,6 @@ class AuthController extends GetxController {
   //Email verify FormKey
   final GlobalKey<FormState> emailverifyFormKey = GlobalKey<FormState>();
 
-// Login password obsecurity
-  RxBool loginpasswordObsecured = true.obs;
-
-// Reset password obsecurity
-  RxBool resetPasswordObsecured = true.obs;
-
-  // Reset confirm password obsecurity
-  RxBool resetConfirmPasswordObsecured = true.obs;
-
   // List of terms condition options
   List<String> termsconditionoptions = <String>[
     "Terms of Service",
@@ -136,22 +138,37 @@ class AuthController extends GetxController {
   // Registration food type
   List foodType = ["Veg", "Non Veg", "Both"];
 
-  RxInt servingIndex = 0.obs;
-
   // Registration selected food type
   Rx<String> selectedFood = "Veg".obs;
 
   // Restuarant selected open days
-  RxList selectedDays = [].obs;
+  RxList<String> selectedDays = <String>[].obs;
 
   // Login password obsecurity
   RxBool loginPasswordObsecured = true.obs;
 
+  
+  // Register password obsecurity
+  RxBool registerPasswordObsecured = true.obs;
+
+  
+  // Register confirm  password obsecurity
+  RxBool registerConfirmPasswordObsecured = true.obs;
+
   // Boolean parameter for login
   RxBool loadingLogin = false.obs;
 
+  // Register button loading
+  RxBool registerLoading = false.obs;
+
   // Boolean parameter for forgot password
   RxBool loadingforgotPassword = false.obs;
+
+  // Reset password obsecurity
+  RxBool resetPasswordObsecured = true.obs;
+
+  // Reset confirm password obsecurity
+  RxBool resetConfirmPasswordObsecured = true.obs;
 
   // Boolean parameter otp verify
   RxBool otpFieldProcessing = false.obs;
@@ -159,16 +176,23 @@ class AuthController extends GetxController {
   // Boolean parameter reset password
   RxBool resetPasswordProcessing = false.obs;
 
-// Boolean parameter for switch
-  RxBool switchValue = false.obs;
-// Boolean parameter for delivery switch
+  // Boolean parameter for delivery switch
   RxBool deliverySwitch = false.obs;
 
   // Pick up switch value
   RxBool pickUpSwitch = false.obs;
 
+  // Otp send to mail for forgot password
   RxInt sentOtp = 0.obs;
+
+  // User id comming from response
   RxString sentUserId = "".obs;
+
+  // Variable to save the otp verfication daa
+  RxString otpVerificationData = "".obs;
+
+  // Loader for email verification
+  RxBool emailVerification = false.obs;
 
   // List of serving model
   RxList<ServingFields> servings = <ServingFields>[].obs;
@@ -209,7 +233,6 @@ class AuthController extends GetxController {
 
     // Chrcking if data from resposne comming successfully or not
     else if (loginResponse["success"] != null) {
-      log(loginResponse["success"].id.toString());
       // When data comming from resposnse successfully
       // we will store restaurat id and token comming from resposne inside cokkie manager
       await CookieManager("id", value: loginResponse["success"].id).save();
@@ -266,12 +289,10 @@ class AuthController extends GetxController {
     // Checkihg if error is null or not comming from resposne
     if (otpverifyresponse["error"] != null) {
       FlashManager().show(otpverifyresponse["error"]);
-      log("error");
     }
     // Checking if otp resposne comming successfully or not
     if (otpverifyresponse["success"] != null) {
       FlashManager().show("OTP verified successfully");
-      log("successfully");
       Get.to(() => const ResetPasswordScreen());
     }
 // Stop loader for otp varify
@@ -300,6 +321,92 @@ class AuthController extends GetxController {
     }
     // Stop loader for reset password
     resetPasswordProcessing.value = false;
+  }
+
+  // Create restaurant function
+  Future<void> create() async {
+    // Restaurant registering process start
+    registerLoading.value = true;
+
+    // Create restaurant class instance
+    final Restaurant restaurant = Restaurant(
+        name: regNameController.text.trim(),
+        description: regDescriptionController.text.trim(),
+        email: regEmailController.text.trim(),
+        password: regPasswordController.text.trim(),
+        phone: regPhoneController.text.trim(),
+        website: regWebsiteController.text.trim(),
+        address: Address(
+            fullAddress: regFullAddressController.text.trim(),
+            city: regCityController.text.trim(),
+            country: regCountryController.text.trim(),
+            pincode: regPincodeController.text.trim(),
+            state: regStateController.text.trim()),
+        servings: servings
+            .map((element) => element.servingController.text.trim())
+            .toList(),
+        delivery: Delivery(
+            available: deliverySwitch.value,
+            estimatedTime: deliveryEstimatedtimeController.text.trim(),
+            fee: double.parse(deliveryfeeController.text.trim()),
+            minOrder: double.parse(minimumorderController.text.trim()).toInt()),
+        openingDays: selectedDays,
+        pickup: Pickup(
+            available: pickUpSwitch.value,
+            estimatedTime: pickupEstimatedtimeController.text.trim()),
+        timing: Timing(
+            closingTime: regCloseTimeController.text.trim(),
+            openingTime: regOpenTimeController.text.trim()),
+        type: selectedFood.value);
+
+    // Create restaurat function from the class
+    final response = await restaurant.create();
+
+    // Check for error in the response
+    if (response["error"] != null) {
+      FlashManager().show(response["error"]);
+    }
+
+    // Check for success in the response
+    if (response["success"] != null) {
+      // Save the otp verificiation encrypted string
+      otpVerificationData.value = response["otp"];
+
+      log(otpVerificationData.value.toString());
+
+      // OTP sent to email - show this message
+      FlashManager().show("OTP sent to registered email");
+
+      // Navigate to the OTP verification screen
+      Get.to(() => const EmailVerifyScreen());
+    }
+
+    // Restaurant created successfully
+    registerLoading.value = false;
+  }
+
+  // Verify email
+  verifyEmail({ otp, encryptedData}) async {
+    // Starting loader for email verify
+    emailVerification.value = true;
+
+    final restaurant = Restaurant();
+
+    final emailverifyresponse = await restaurant.verifyEmail(
+        otp: otp,
+        encryptedOtp: encryptedData);
+
+    // Checkihg if error is null or not comming from resposne
+    if (emailverifyresponse["error"] != null) {
+      FlashManager().show(emailverifyresponse["error"]);
+    }
+    // Checking if otp resposne comming successfully or not
+    if (emailverifyresponse["success"] != null) {
+      FlashManager().show("Email verified successfully");
+      Get.to(() => const LoginScreen());
+    }
+    // Stop loader for email varify
+    emailVerification.value = false;
   }
 }
 

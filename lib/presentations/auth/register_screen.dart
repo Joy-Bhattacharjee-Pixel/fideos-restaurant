@@ -1,11 +1,14 @@
 import 'dart:developer';
 import 'package:fideos_restaurant/controllers/auth_controller.dart';
 import 'package:fideos_restaurant/models/app_color.dart';
+import 'package:fideos_restaurant/presentations/auth/login_screen.dart';
 import 'package:fideos_restaurant/utils/button.dart';
+import 'package:fideos_restaurant/utils/loader.dart';
 import 'package:fideos_restaurant/utils/separator.dart';
 import 'package:fideos_restaurant/utils/text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -60,6 +63,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // Restaurat name text field
                       TextFieldService(
                               controller: _controller.regNameController,
+                              validator: (name) =>
+                                  _validator(value: name, fieldName: "name"),
                               hint: "Restaurant Name")
                           .show(),
 
@@ -68,7 +73,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       // Restaurat name text field
                       TextFieldService(
+                              controller: _controller.regDescriptionController,
+                              hint: "Restaurant Description")
+                          .show(),
+
+                      // Adding some space
+                      const SizedBox(height: 10),
+
+                      // Restaurat name text field
+                      TextFieldService(
                               controller: _controller.regEmailController,
+                              validator: (email) =>
+                                  _emailValidator(email: email),
                               hint: "Restaurant Email")
                           .show(),
 
@@ -78,6 +94,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // Restaurat name text field
                       TextFieldService(
                               controller: _controller.regPhoneController,
+                              validator: (name) =>
+                                  _validator(value: name, fieldName: "phone"),
                               hint: "Restaurant Phone")
                           .show(),
 
@@ -85,19 +103,53 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(height: 10),
 
                       // Restaurat name text field
-                      TextFieldService(
+                      Obx(() => TextFieldService(
                               controller: _controller.regPasswordController,
+                              passwordObsecured:
+                                  _controller.registerPasswordObsecured.value,
+                              onTapSuffix: () => _controller
+                                      .registerPasswordObsecured.value =
+                                  !_controller.registerPasswordObsecured.value,
+                              suffix:
+                                  _controller.registerPasswordObsecured.value
+                                      ? Feather.eye
+                                      : Feather.eye_off,
+                              validator: (password) =>
+                                  _passwordValidator(password: password),
                               hint: "Password")
-                          .show(),
+                          .show()),
+
+                      // Adding some space
+                      const SizedBox(height: 10),
+
+                      // Restaurat name text field
+                      Obx(() => TextFieldService(
+                              controller:
+                                  _controller.regConfirmPasswordController,
+                              passwordObsecured: _controller
+                                  .registerConfirmPasswordObsecured.value,
+                              onTapSuffix: () => _controller
+                                      .registerConfirmPasswordObsecured.value =
+                                  !_controller
+                                      .registerConfirmPasswordObsecured.value,
+                              suffix: _controller
+                                      .registerConfirmPasswordObsecured.value
+                                  ? Feather.eye
+                                  : Feather.eye_off,
+                              validator: (confirmPassword) =>
+                                  _confirmPasswordValidator(password: confirmPassword),
+                              hint: "Confirm Password")
+                          .show()),
 
                       // Adding some space
                       const SizedBox(height: 10),
 
                       // Restaurat name text field
                       TextFieldService(
-                              controller:
-                                  _controller.regConfirmPasswordController,
-                              hint: "Confirm Password")
+                              controller: _controller.regWebsiteController,
+                              validator: (name) => _validator(
+                                  value: name, fieldName: "website url"),
+                              hint: "Website Url")
                           .show(),
 
                       // Adding some space
@@ -115,6 +167,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // Full address field
                       TextFieldService(
                               controller: _controller.regFullAddressController,
+                              validator: (address) => _validator(
+                                  value: address, fieldName: "full address"),
                               hint: "Full Address")
                           .show(),
 
@@ -124,6 +178,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // City field
                       TextFieldService(
                               controller: _controller.regCityController,
+                              validator: (city) =>
+                                  _validator(value: city, fieldName: "city"),
                               hint: "City")
                           .show(),
 
@@ -133,6 +189,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // State field
                       TextFieldService(
                               controller: _controller.regStateController,
+                              validator: (state) =>
+                                  _validator(value: state, fieldName: "state"),
                               hint: "State")
                           .show(),
 
@@ -142,6 +200,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // State field
                       TextFieldService(
                               controller: _controller.regCountryController,
+                              validator: (country) => _validator(
+                                  value: country, fieldName: "country"),
                               hint: "Country")
                           .show(),
 
@@ -150,6 +210,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // State field
                       TextFieldService(
                               controller: _controller.regPincodeController,
+                              validator: (pincode) => _validator(
+                                  value: pincode, fieldName: "pin code"),
                               hint: "Pin Code")
                           .show(),
 
@@ -287,6 +349,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // Restaurant open time field
                       TextFieldService(
                               controller: _controller.regOpenTimeController,
+                              validator: (openTime) => _validator(
+                                  value: openTime, fieldName: "opening time"),
                               hint: "Restaurant Open Time")
                           .show(),
 
@@ -296,6 +360,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // Restaurant close time field
                       TextFieldService(
                               controller: _controller.regCloseTimeController,
+                              validator: (closetime) => _validator(
+                                  value: closetime, fieldName: "closing time"),
                               hint: "Restaurant Close Time")
                           .show(),
 
@@ -394,6 +460,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 TextFieldService(
                                         controller:
                                             _controller.deliveryfeeController,
+                                        validator: (fee) => _validator(
+                                            value: fee,
+                                            fieldName: "delivery fee"),
                                         hint: "Delivery fee")
                                     .show(),
 
@@ -404,6 +473,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 TextFieldService(
                                         controller:
                                             _controller.minimumorderController,
+                                        validator: (minorder) => _validator(
+                                            value: minorder,
+                                            fieldName: "minimum order"),
                                         hint: "Minimum order")
                                     .show(),
 
@@ -414,6 +486,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 TextFieldService(
                                         controller: _controller
                                             .deliveryEstimatedtimeController,
+                                        validator: (eTime) => _validator(
+                                            value: eTime,
+                                            fieldName: "estimated time"),
                                         hint: "Estimated Time")
                                     .show()
                               ]))
@@ -445,6 +520,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               child: TextFieldService(
                                       controller: _controller
                                           .pickupEstimatedtimeController,
+                                      validator: (eTime) => _validator(
+                                          value: eTime,
+                                          fieldName: "estimated time"),
                                       hint: "Estimated Time")
                                   .show(),
                             )
@@ -456,8 +534,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
 
                       // Register button
-                      ButtonManager(onPressed: () {}, text: "Register")
-                          .elevated(),
+                      Obx(
+                        () => _controller.registerLoading.value == true
+                            ? Loader().show()
+                            : ButtonManager(
+                                    onPressed: () => _register(),
+                                    text: "Register")
+                                .elevated(),
+                      ),
 
                       // Adding some space
                       const SizedBox(height: 30),
@@ -479,7 +563,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             const SizedBox(width: 5),
                             InkWell(
                                 onTap: () =>
-                                    Get.to(() => const RegisterScreen()),
+                                    Get.to(() => const LoginScreen()),
                                 child: Text("Log In Now",
                                     style: TextStyle(
                                         color: ColorManager.primary,
@@ -515,5 +599,49 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 )
               ]),
             )));
+  }
+
+  // Field validator
+  _validator({String? value, String? fieldName}) {
+    if (value == null || value.isEmpty) {
+      return "Please enter a valid $fieldName";
+    }
+  }
+
+  // Email validator
+  _emailValidator({String? email}) {
+    if (email == null || email.isEmpty || !email.isEmail) {
+      return "Please enter a valid email";
+    }
+    return null;
+  }
+
+  // password validator
+  _passwordValidator({String? password}) {
+    if (password == null || password.isEmpty) {
+      return "Please enter a valid password";
+    }
+    return null;
+  }
+
+  // confirm password validation
+  _confirmPasswordValidator({String? password}) {
+    if (password == null || password.isEmpty) {
+      return "Please enter a valid password";
+    } else if (password != _controller.regPasswordController.text.trim()) {
+      return "Passwords do not match";
+    }
+    return null;
+  }
+
+  // Calling register function
+  _register() {
+    FocusScope.of(context).unfocus();
+
+    // Validating form
+    if (_controller.registerFormKey.currentState!.validate()) {
+      _controller.registerFormKey.currentState!.save();
+      _controller.create();
+    }
   }
 }
