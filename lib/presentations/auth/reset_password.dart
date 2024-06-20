@@ -25,22 +25,22 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 key: _authController.resetPasswordFormKey,
                 child: SingleChildScrollView(
                     child: Column(children: [
-                  // app icon
+                  // App icon
                   Image.asset("assets/auth_screen.png", width: Get.width),
 
-                  // give space
+                  // Give space
                   const SizedBox(height: 20),
 
-                  // login title
+                  // Login title
                   const Center(
                       child: Text("Reset Password",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w500))),
 
-                  // give space
+                  // Give space
                   const SizedBox(height: 3),
 
-                  // login subtitle
+                  // Login subtitle
                   const Center(
                       child: Text("Please enter both the passwords to update",
                           style: TextStyle(
@@ -48,14 +48,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               color: Colors.grey,
                               fontWeight: FontWeight.w500))),
 
-                  // give space
+                  // Give space
                   const SizedBox(height: 15),
 
-                  // password fields
+                  // Password fields
                   Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(children: [
-                        // password text field
+                        // Password text field
                         Obx(() => TextFieldService(
                             controller: _authController.resetPasswordController,
                             hint: "Password",
@@ -70,10 +70,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             validator: (password) =>
                                 _passwordValidator(password: password)).show()),
 
-                        // give space
+                        // Give space
                         const SizedBox(height: 10),
 
-                        // confirm password text field
+                        // Confirm password text field
                         Obx(() => TextFieldService(
                                 controller:
                                     _authController.resetConfirmPasswordController,
@@ -92,10 +92,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                     _confirmPasswordValidator(password: password))
                             .show()),
 
-                        // give space
+                        // Give space
                         const SizedBox(height: 20),
 
-                        // update password button
+                        // Update password button
                         Obx(() => _authController.resetPasswordProcessing.value
                             ? Loader().show()
                             : ButtonManager(
@@ -126,7 +126,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     return null;
   }
 
-// confirm password validator
+// Confirm password validator
   _confirmPasswordValidator({String? password}) {
     if (password == null || password.isEmpty) {
       return "Please enter a valid password";

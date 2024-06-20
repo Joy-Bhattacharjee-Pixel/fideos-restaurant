@@ -26,22 +26,22 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             child: Form(
                 key: _authController.forgotPasswordFormKey,
                 child: Column(children: [
-                  // app icon
+                  // App icon
                   Image.asset("assets/auth_screen.png", width: Get.width),
 
-                  // give space
+                  // Give space
                   const SizedBox(height: 20),
 
-                  // login title
+                  // Login title
                   const Center(
                       child: Text("Recover your account",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w500))),
 
-                  // give space
+                  // Give space
                   const SizedBox(height: 3),
 
-                  // login subtitle
+                  // Login subtitle
                   const Center(
                       child: Text("Enter your registered email to proceed",
                           style: TextStyle(
@@ -49,14 +49,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               color: Colors.grey,
                               fontWeight: FontWeight.w500))),
 
-                  // give space
+                  // Give space
                   const SizedBox(height: 15),
 
-                  // forgot password form
+                  // Forgot password form
                   Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(children: [
-                        // email text field
+                        // Email text field
                         TextFieldService(
                             controller: _authController.loginEmailController,
                             hint: "Email Address",
@@ -64,10 +64,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             validator: (email) =>
                                 _emailValidator(email: email)).show(),
 
-                        // give space
+                        // Give space
                         const SizedBox(height: 15),
 
-                        // verify email button
+                        // Verify email button
                         Obx(() => _authController.loadingforgotPassword.value
                             ? Loader().show()
                             : ButtonManager(
@@ -75,10 +75,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     text: "Verify Email")
                                 .elevated()),
 
-                        // give space
+                        // Give space
                         const SizedBox(height: 20),
 
-                        // back to login
+                        // Back to login
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -95,13 +95,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                           fontSize: 13.5)))
                             ]),
 
-                        // give space
+                        // Give space
                         const SizedBox(height: 10)
                       ]))
                 ]))));
   }
 
-// verify email
+// Verify email
   _verifyEmail() {
     FocusScope.of(context).unfocus();
 
@@ -112,7 +112,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     }
   }
 
-// email validator
+// Email validator
   _emailValidator({String? email}) {
     if (email == null || email.isEmpty || !email.isEmail) {
       return "Please enter a valid email";

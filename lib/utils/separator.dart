@@ -17,16 +17,16 @@ class Seperator {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            // expande left side divider
+            // Expande left side divider
             const Expanded(child: Divider(color: Colors.black12)),
 
-            // text between two divider
+            // Text between two divider
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 7.0),
                 child: Text(text,
                     style: TextStyle(color: ColorManager.grey, fontFamily: "Lexend", fontSize: 12))),
 
-            // expande right side divider
+            // Expande right side divider
             const Expanded(child: Divider(color: Colors.black12))
           ]));
 }
