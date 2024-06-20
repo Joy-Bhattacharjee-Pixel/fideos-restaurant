@@ -101,7 +101,7 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
             ]))));
   }
 
-  // email verify
+  // Email verify
   _verifyEmail() {
     FocusScope.of(context).unfocus();
     if (_controller.emailverifyFormKey.currentState!.validate()) {

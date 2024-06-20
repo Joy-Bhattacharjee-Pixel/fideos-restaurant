@@ -109,10 +109,9 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
     if (_authController.otpFieldFormKey.currentState!.validate()) {
       _authController.otpFieldFormKey.currentState!.save();
       _authController.verifyOtp(
-        id: _authController.sentUserId.value,
-        otp: _authController.sentOtp.value.toString(),
-        enteredOtp: _authController.otpController.text.trim(),
-      );
+          id: _authController.sentUserId.value,
+          otp: _authController.sentOtp.value.toString(),
+          enteredOtp: _authController.otpController.text.trim());
     }
   }
 }

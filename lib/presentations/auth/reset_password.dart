@@ -14,7 +14,7 @@ class ResetPasswordScreen extends StatefulWidget {
 }
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
-  // importing authcontroller
+  // Importing Authcontroller
   final AuthController _authController = Get.put(AuthController());
 
   @override

@@ -140,7 +140,7 @@ class AuthController extends GetxController {
     "Content Policy"
   ];
 
-  // restuarant open days
+  // Restuarant open days
   List weekDays = [
     "Sunday",
     "Monday",
@@ -223,9 +223,7 @@ class AuthController extends GetxController {
 
   // REMOVING TEXT FORM FIELD MODEL INTO THE ARRAY
   removeServings(index) async {
-    // FLIGHT TEXT CONTROLLERS ADD
     servings.removeAt(index);
-
     // REFRESHING TEXT EDITING CONTROLLERS
     servings.refresh();
   }
@@ -264,7 +262,7 @@ class AuthController extends GetxController {
     loadingLogin.value = false;
   }
 
-  // forgot password
+  // Forgot password
   forgotPassword({email}) async {
     // Starting loader for forgot password
     loadingforgotPassword.value = true;

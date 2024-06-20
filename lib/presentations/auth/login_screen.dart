@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
           key: _controller.loginFormKey,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            // top Image
+            // Top Image
             const Image(image: AssetImage("assets/auth_screen.png")),
 
             // Adding some space
@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
             // Adding some space
             const SizedBox(height: 20),
 
-            // putting divider section
+            // Putting divider section
             Seperator(text: "Log in or Sign up").show(),
 
             // Adding some space
@@ -77,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     validator: (password) =>
                         _passwordValidator(password: password)).show())),
 
-            // forgot password option
+            // Forgot password option
             Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 14),
                 child: GestureDetector(
@@ -90,10 +90,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontSize: 12.5,
                                 fontWeight: FontWeight.bold))))),
 
-            // give space
+            // Give space
             const SizedBox(height: 15),
 
-            // continue button
+            //Continue button
             Obx(() => _controller.loadingLogin.value
                 ? Loader().show()
                 : Padding(
@@ -107,17 +107,17 @@ class _LoginScreenState extends State<LoginScreen> {
             // Adding some space
             const SizedBox(height: 30),
 
-            // putting divider section
+            // Putting divider section
             Seperator(text: "or").show(),
 
-            // give space
+            // Give space
             const SizedBox(height: 15),
 
-            // register option
+            // Register option
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               const Text("Don't have an restaurant account?",
                   style: TextStyle(color: Colors.black, fontSize: 13.5)),
-              // give space
+              // Give space
               const SizedBox(width: 5),
               InkWell(
                   onTap: () => Get.to(() => const RegisterScreen()),
@@ -128,17 +128,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.bold)))
             ]),
 
-            // give space
+            // Give space
             const SizedBox(height: 30),
 
-            //  continuing agree text
+            //  Continuing agree text
             const Text("By continuing, you agree to our",
                 style: TextStyle(fontSize: 13)),
 
-            // give space
+            // Give space
             const SizedBox(height: 6),
 
-            // terms and conditions Options list
+            // Terms and conditions Options list
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: _controller.termsconditionoptions
@@ -151,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: ColorManager.primary))))
                     .toList()),
 
-            // give space
+            // Give space
             const SizedBox(height: 20),
           ])),
     ));
@@ -165,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return null;
   }
 
-  // password validator
+  // Password validator
   _passwordValidator({String? password}) {
     if (password == null || password.isEmpty) {
       return "Please enter a valid password";
