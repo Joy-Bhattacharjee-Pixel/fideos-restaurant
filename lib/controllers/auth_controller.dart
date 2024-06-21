@@ -325,6 +325,7 @@ class AuthController extends GetxController {
     // If response error
     if (response["error"] != null) {
       FlashManager().show(response["error"]);
+      
     }
     // If res
     if (response["success"] != null) {
