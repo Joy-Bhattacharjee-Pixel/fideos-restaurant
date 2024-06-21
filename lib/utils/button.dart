@@ -27,5 +27,5 @@ class ButtonManager {
   outlineStyle() => OutlinedButton.styleFrom(
       fixedSize: Size(Get.width, 43),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
-      side: const BorderSide(color: Color(0xFF437FF7)));
+      side:  BorderSide(color: ColorManager.primary));
 }

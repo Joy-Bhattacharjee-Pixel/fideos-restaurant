@@ -78,6 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         _passwordValidator(password: password)).show())),
 
             // Forgot password option
+            // Forgot password option
             Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 14),
                 child: GestureDetector(
@@ -93,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
             // Give space
             const SizedBox(height: 15),
 
-            //Continue button
+            // continue button
             Obx(() => _controller.loadingLogin.value
                 ? Loader().show()
                 : Padding(
@@ -117,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               const Text("Don't have an restaurant account?",
                   style: TextStyle(color: Colors.black, fontSize: 13.5)),
-              // Give space
+              // give space
               const SizedBox(width: 5),
               InkWell(
                   onTap: () => Get.to(() => const RegisterScreen()),

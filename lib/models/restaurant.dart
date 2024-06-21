@@ -13,7 +13,7 @@ class Restaurant {
   String? logo;
   String? description;
   Address? address;
-  String? type;
+  dynamic type;
   List<String>? servings;
   Timing? timing;
   List<String>? openingDays;
@@ -52,7 +52,7 @@ class Restaurant {
     description = json['description'];
     address =
         json['address'] != null ? Address.fromJson(json['address']) : null;
-    type = json['type'].cast<String>();
+    type = json['type'];
     servings = json['servings'].cast<String>();
     timing = json['timing'] != null ? Timing.fromJson(json['timing']) : null;
     openingDays = json['openingDays'].cast<String>();
@@ -221,7 +221,7 @@ class Address {
   String? city;
   String? state;
   String? country;
-  String? pincode;
+  dynamic pincode;
 
   Address(
       {this.fullAddress, this.city, this.state, this.country, this.pincode});

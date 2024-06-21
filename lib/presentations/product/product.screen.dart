@@ -23,7 +23,6 @@ class _ProductScreenState extends State<ProductScreen> {
           style: TextStyle(
               fontSize: 21, color: Colors.black, fontWeight: FontWeight.bold)),
 
-
       // Sub title
       const Text("Saltlake Sector 3, Bidhannagar, Kolkata",
           textAlign: TextAlign.center,
@@ -124,7 +123,6 @@ class _ProductScreenState extends State<ProductScreen> {
 
                                   // Product price
                                   Row(children: [
-
                                     // Discounted price
                                     Text("\$200",
                                         softWrap: true,

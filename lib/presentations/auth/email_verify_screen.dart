@@ -23,6 +23,7 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
             key: _controller.emailverifyFormKey,
             child: SingleChildScrollView(
                 child: Column(children: [
+
               // App icon
               Image.asset("assets/auth_screen.png", width: Get.width),
 
@@ -46,6 +47,7 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
                           fontSize: 13,
                           color: Colors.grey,
                           fontWeight: FontWeight.w500))),
+
               // Give space
               const SizedBox(height: 15),
 
