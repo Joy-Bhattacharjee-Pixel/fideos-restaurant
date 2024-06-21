@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:fideos_restaurant/presentations/base/base_screen.dart';
 import 'package:fideos_restaurant/models/restaurant.dart';
 import 'package:fideos_restaurant/presentations/auth/email_verify_screen.dart';
 import 'package:fideos_restaurant/presentations/auth/login_screen.dart';
@@ -256,7 +257,7 @@ class AuthController extends GetxController {
       FlashManager().show("Login Successful");
 
       // Navigating to screen
-      Get.to(() => const RegisterScreen());
+      Get.to(() => const BaseScreen());
     }
     // Stop loader for login
     loadingLogin.value = false;

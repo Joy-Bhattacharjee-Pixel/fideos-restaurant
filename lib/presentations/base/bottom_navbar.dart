@@ -1,4 +1,3 @@
-
 import 'package:fideos_restaurant/controllers/base.controller.dart';
 import 'package:fideos_restaurant/models/app_color.dart';
 import 'package:flutter/material.dart';
@@ -47,16 +46,14 @@ class _BottomNavbarState extends State<BottomNavbar> {
                 items: List.generate(
                     4,
                     (index) => items(
-                        image: controller.image[index],
+                        icon: controller.icon[index],
                         label: controller.screennames[index]))))));
   }
 
 // Bottom navbar icon and label
-  BottomNavigationBarItem items(
-          {required Image image, required String label}) =>
+  BottomNavigationBarItem items({required Icon icon, required String label}) =>
       BottomNavigationBarItem(
           icon: Padding(
-              padding: const EdgeInsets.only(top: 5.0, bottom: 2),
-              child: image),
+              padding: const EdgeInsets.only(top: 5.0, bottom: 2), child: icon),
           label: label);
 }

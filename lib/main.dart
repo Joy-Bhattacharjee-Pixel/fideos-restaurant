@@ -1,4 +1,4 @@
-import 'package:fideos_restaurant/base/base_screen.dart';
+import 'package:fideos_restaurant/presentations/base/base_screen.dart';
 import 'package:fideos_restaurant/models/app_color.dart';
 import 'package:fideos_restaurant/presentations/profile/profile.dart';
 import 'package:fideos_restaurant/presentations/reservation/reservation.details.dart';

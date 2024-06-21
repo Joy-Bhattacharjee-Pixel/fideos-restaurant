@@ -1,4 +1,4 @@
-import 'package:fideos_restaurant/base/drawer_screen.dart';
+import 'package:fideos_restaurant/presentations/base/drawer_screen.dart';
 import 'package:fideos_restaurant/controllers/base.controller.dart';
 import 'package:fideos_restaurant/models/app_color.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,7 @@ class _BaseScreenState extends State<BaseScreen> {
         appBar: AppBar(
           centerTitle: true,
           title: Obx(
-              () => Text(controller.screennames[controller.selected.value])),
+              () => Text(controller.screennames[controller.selected.value], style: const TextStyle(fontSize: 18),)),
         ),
         bottomNavigationBar: const BottomNavbar(),
         body: Obx(() => controller.screens[controller.selected.value]));

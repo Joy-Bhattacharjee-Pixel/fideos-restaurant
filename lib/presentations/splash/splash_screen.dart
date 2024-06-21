@@ -1,4 +1,5 @@
 import 'package:fideos_restaurant/presentations/auth/login_screen.dart';
+import 'package:fideos_restaurant/presentations/base/base_screen.dart';
 import 'package:fideos_restaurant/utils/cookies.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (id == null) {
       Get.to(() => const LoginScreen());
     } else {
-      Get.to(() => Container());
+      Get.to(() => BaseScreen());
     }
   }
 
