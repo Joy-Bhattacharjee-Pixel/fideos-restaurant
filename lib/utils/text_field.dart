@@ -19,43 +19,34 @@ class TextFieldService {
       this.type = TextInputType.text});
 
   show() => TextFormField(
-        validator: (value) {
-          if (validator != null) {
-            return validator!(value);
-          }
-          return null;
-        },
-        keyboardType: type,
-        controller: controller,
-        obscureText: passwordObsecured,
-        style: const TextStyle(fontSize: 14),
-        decoration: InputDecoration(
-            enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey)),
-            border: const OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey)),
-            focusedBorder:
-                const OutlineInputBorder(borderSide: BorderSide(width: 1)),
-            suffixIcon: GestureDetector(
-                onTap: () {
-                  if (onTapSuffix != null) {
-                    onTapSuffix!();
-                  }
-                },
-                child: Icon(suffix, size: 15, color: Colors.black)),
-            hintText: hint,
-            label: Text(
-              hint,
+      validator: (value) {
+        if (validator != null) {
+          return validator!(value);
+        }
+        return null;
+      },
+      keyboardType: type,
+      controller: controller,
+      obscureText: passwordObsecured,
+      style: const TextStyle(fontSize: 14),
+      decoration: InputDecoration(
+          enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey)),
+          border: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey)),
+          focusedBorder:
+              const OutlineInputBorder(borderSide: BorderSide(width: 1)),
+          suffixIcon: GestureDetector(
+              onTap: () {
+                if (onTapSuffix != null) {
+                  onTapSuffix!();
+                }
+              },
+              child: Icon(suffix, size: 15, color: Colors.black)),
+          hintText: hint,
+          label: Text(hint,
               style: const TextStyle(
-                fontSize: 13,
-                fontFamily: "Lexend",
-                color: Colors.grey,
-              ),
-            ),
-            hintStyle: const TextStyle(
-              fontSize: 13,
-              fontFamily: "Lexend",
-              color: Colors.grey,
-            )),
-      );
+                  fontSize: 13, fontFamily: "Lexend", color: Colors.grey)),
+          hintStyle: const TextStyle(
+              fontSize: 13, fontFamily: "Lexend", color: Colors.grey)));
 }

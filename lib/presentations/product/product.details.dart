@@ -5,14 +5,14 @@ import 'package:fideos_restaurant/utils/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ReservationDetails extends StatefulWidget {
-  const ReservationDetails({super.key});
+class ProductDetails extends StatefulWidget {
+  const ProductDetails({super.key});
 
   @override
-  State<ReservationDetails> createState() => _ReservationDetailsState();
+  State<ProductDetails> createState() => _ProductDetailsState();
 }
 
-class _ReservationDetailsState extends State<ReservationDetails> {
+class _ProductDetailsState extends State<ProductDetails> {
   // Importing auth controller
   final _controller = AuthController();
   @override
@@ -107,14 +107,14 @@ class _ReservationDetailsState extends State<ReservationDetails> {
 
           // Add new tag field
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
-            child: TextFieldService(
-                    controller: _controller.newTagController,
-                    validator: (nTag) =>
-                        _validator(value: nTag, fieldName: "New Tag"),
-                    hint: "Add New Tag")
-                .show(),
-          ),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
+              child: TextFieldService(
+                      controller: _controller.newTagController,
+                      validator: (nTag) =>
+                          _validator(value: nTag, fieldName: "New Tag"),
+                      hint: "Add New Tag")
+                  .show()),
 
           // Add new tag list
           Padding(

@@ -43,9 +43,9 @@ class OutlineBoxManager extends StatelessWidget {
         alignment: Alignment.center,
         child: Text(text,
             style: TextStyle(
-              // Text color
-              color: color ?? ColorManager.primary,
-              // fontFamily: fontFamily ? Fonts.medium : Fonts.regular
-            )));
+                // Text color
+                color: color ?? ColorManager.primary
+                // fontFamily: fontFamily ? Fonts.medium : Fonts.regular
+                )));
   }
 }

@@ -1,17 +1,17 @@
 import 'package:fideos_restaurant/models/app_color.dart';
-import 'package:fideos_restaurant/presentations/reservation/reservation.details.dart';
+import 'package:fideos_restaurant/presentations/product/product.details.dart';
 import 'package:fideos_restaurant/utils/outlinebox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ReservationScreen extends StatefulWidget {
-  const ReservationScreen({super.key});
+class ProductScreen extends StatefulWidget {
+  const ProductScreen({super.key});
 
   @override
-  State<ReservationScreen> createState() => _ReservationScreenState();
+  State<ProductScreen> createState() => _ProductScreenState();
 }
 
-class _ReservationScreenState extends State<ReservationScreen> {
+class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +44,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                   6,
                   (index) => GestureDetector(
                       onTap: () {
-                        Get.to(() => const ReservationDetails());
+                        Get.to(() => const ProductDetails());
                       },
                       child: Container(
                           padding: const EdgeInsets.symmetric(

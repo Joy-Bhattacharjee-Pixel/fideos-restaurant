@@ -79,24 +79,6 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
                     // Give space
                     const SizedBox(height: 20),
 
-                    // // back to login
-                    // Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    //   const Text("Lost OTP?",
-                    //       style:
-                    //           TextStyle(color: Colors.black, fontSize: 13.5)),
-
-                    //   // give space
-                    //   const SizedBox(width: 5),
-
-                    //   InkWell(
-                    //       onTap: () {},
-                    //       child: Text("Resend",
-                    //           style: TextStyle(
-                    //               color: ColorManager.primary, fontSize: 13.5)))
-                    // ]),
-
-                    // Give space
-                    const SizedBox(height: 10)
                   ]))
             ]))));
   }
