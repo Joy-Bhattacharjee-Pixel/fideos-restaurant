@@ -1,17 +1,17 @@
 import 'package:fideos_restaurant/models/app_color.dart';
-import 'package:fideos_restaurant/presentations/product/product.details.dart';
+import 'package:fideos_restaurant/presentations/food/food.details.dart';
 import 'package:fideos_restaurant/utils/outlinebox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProductScreen extends StatefulWidget {
-  const ProductScreen({super.key});
+class FoodScreen extends StatefulWidget {
+  const FoodScreen({super.key});
 
   @override
-  State<ProductScreen> createState() => _ProductScreenState();
+  State<FoodScreen> createState() => _FoodScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
+class _FoodScreenState extends State<FoodScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,9 +29,9 @@ class _ProductScreenState extends State<ProductScreen> {
           softWrap: true,
           style: TextStyle(fontSize: 13, color: Colors.black)),
 
-      // Add product button
+      // Add food button
       OutlineBoxManager(
-          text: "Add Product",
+          text: "Add Food",
           color: ColorManager.primary,
           width: Get.width * 0.7,
           fontFamily: true),
@@ -97,7 +97,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                                 color: ColorManager.primary))
                                       ]),
 
-                                  // Product description
+                                  // Food description
                                   SizedBox(
                                       width: Get.width * 0.65,
                                       child: const Text(
@@ -121,7 +121,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                   // Giving some space
                                   const SizedBox(height: 3),
 
-                                  // Product price
+                                  // Food price
                                   Row(children: [
                                     // Discounted price
                                     Text("\$200",
