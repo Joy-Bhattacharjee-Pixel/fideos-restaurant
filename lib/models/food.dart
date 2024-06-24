@@ -46,7 +46,13 @@ class Food {
 
 
   // Fetch all foods 
-  
+  allFoods({ required String restaurantId}) async{
+    // Preparing endpoint 
+    const endpoint  = "/foods/all"; 
+
+    // Preparing query params
+    final queryParams = { "restaurantId": restaurantId };
+  }
 }
 
 class Menu {
