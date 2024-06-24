@@ -1,3 +1,8 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:fideos_restaurant/controllers/restaurant.controller.dart';
+import 'package:fideos_restaurant/models/restaurant.dart';
 import 'package:fideos_restaurant/presentations/auth/login_screen.dart';
 import 'package:fideos_restaurant/presentations/base/base_screen.dart';
 import 'package:fideos_restaurant/utils/cookies.dart';
@@ -26,13 +31,16 @@ class _SplashScreenState extends State<SplashScreen> {
     _checkRoute();
   }
 
+  final controller = Get.put(RestaurantController());
 // This function navigate to the screen based on the cookies name "id" match or not
   _checkRoute() async {
     final id = await CookieManager("id").get();
-    if (id == null) {
-      Get.to(() => const LoginScreen());
+    log(id.toString());
+
+    if (id != null) {
+      Get.to(() => const BaseScreen());
     } else {
-      Get.to(() => BaseScreen());
+      Get.to(() => const LoginScreen());
     }
   }
 
