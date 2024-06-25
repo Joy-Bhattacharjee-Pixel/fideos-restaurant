@@ -18,6 +18,7 @@ class RestaurantController extends GetxController {
 
     // Creating restaurat
     final restaurant = Restaurant();
+    
     // Fetching id from the saved cookieManager
     final id = await CookieManager("id").get();
     log(id.toString());
@@ -26,21 +27,21 @@ class RestaurantController extends GetxController {
 
     // if response error
     if (fetchDetailsResponse["error"] != null) {
+
       // Showing error maessage
       FlashManager().show(fetchDetailsResponse["error"]);
+
       // If response success
     } else if (fetchDetailsResponse["success"] != null) {
 
       // Showing error maessage
       FlashManager().show("Fetch Details successfully");
 
-      // log(fetchDetailsResponse["success"].toString());
-
       // Parsing the restaurantData value into string 
       restaurantData.value = Restaurant.fromJson(fetchDetailsResponse["success"]);
 
 
-      // navigate get to
+      // Navigate to profile screen 
       Get.to(() =>const ProfileScreen());
     }
     // Stop loader for resturant Details

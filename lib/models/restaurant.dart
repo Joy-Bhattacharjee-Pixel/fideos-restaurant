@@ -220,15 +220,18 @@ class Restaurant {
     try {
       // Preparing end point
       const endpoint = "/restaurants/details";
+
       // Preparing query parameters
       final params = {"id": id};
+
       // Fetching response
       final response = await APIClient().get(endpoint, queryParameters: params);
-      // returning response as success
+
+      // Returning response as success
       return {
         "success": response.data["restaurant"],
       };
-      // returning response as failed
+      // Returning response as failed
     } on DioException catch (e) {
       return {"error": e.response!.data["error"]};
     }
