@@ -2,14 +2,14 @@ import 'package:fideos_restaurant/models/app_color.dart';
 import 'package:fideos_restaurant/utils/outlinebox.dart';
 import 'package:flutter/material.dart';
 
-class AddNewMenu extends StatefulWidget {
-  const AddNewMenu({super.key});
+class AddMenu extends StatefulWidget {
+  const AddMenu({super.key});
 
   @override
-  State<AddNewMenu> createState() => _AddNewMenuState();
+  State<AddMenu> createState() => _AddMenuState();
 }
 
-class _AddNewMenuState extends State<AddNewMenu> {
+class _AddMenuState extends State<AddMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

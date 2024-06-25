@@ -1,8 +1,5 @@
-import 'package:fideos_restaurant/presentations/base/base_screen.dart';
 import 'package:fideos_restaurant/models/app_color.dart';
-import 'package:fideos_restaurant/presentations/profile/profile.dart';
-import 'package:fideos_restaurant/presentations/reservation/reservation.details.dart';
-import 'package:fideos_restaurant/presentations/splash/splash_screen.dart';
+import 'package:fideos_restaurant/presentations/menu/add.new.menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,6 +21,6 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
             fontFamily: "Lexend",
             primaryColor: ColorManager.primary),
-        home: const SplashScreen());
+        home: const AddNewMenu());
   }
 }

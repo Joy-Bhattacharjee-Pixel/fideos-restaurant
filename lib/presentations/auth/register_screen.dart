@@ -38,29 +38,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(children: [
                 // Image
                 const Image(image: AssetImage("assets/auth_screen.png")),
-              
+
                 // Adding some space
                 const SizedBox(height: 10),
-              
+
                 // Title for restaurat
                 const Text("India’s #1 Food Video and Delivery App",
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 22, fontWeight: FontWeight.w600)),
-              
+
                 // Adding some space
                 const SizedBox(height: 20),
-              
+
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Column(
                     children: [
                       // Seperator for title
                       Seperator(text: "Sign up", horizontalPadding: 0).show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 10),
-              
+
                       // Restaurat name text field
                       TextFieldService(
                               controller: _controller.regNameController,
@@ -68,19 +68,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   _validator(value: name, fieldName: "name"),
                               hint: "Restaurant Name")
                           .show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 10),
-              
+
                       // Restaurat name text field
                       TextFieldService(
                               controller: _controller.regDescriptionController,
                               hint: "Restaurant Description")
                           .show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 10),
-              
+
                       // Restaurat name text field
                       TextFieldService(
                               controller: _controller.regEmailController,
@@ -88,10 +88,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   _emailValidator(email: email),
                               hint: "Restaurant Email")
                           .show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 10),
-              
+
                       // Restaurat name text field
                       TextFieldService(
                               controller: _controller.regPhoneController,
@@ -99,10 +99,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   _validator(value: name, fieldName: "phone"),
                               hint: "Restaurant Phone")
                           .show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 10),
-              
+
                       // Restaurat name text field
                       Obx(() => TextFieldService(
                               controller: _controller.regPasswordController,
@@ -119,10 +119,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   _passwordValidator(password: password),
                               hint: "Password")
                           .show()),
-              
+
                       // Adding some space
                       const SizedBox(height: 10),
-              
+
                       // Restaurat name text field
                       Obx(() => TextFieldService(
                               controller:
@@ -141,10 +141,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   _confirmPasswordValidator(password: confirmPassword),
                               hint: "Confirm Password")
                           .show()),
-              
+
                       // Adding some space
                       const SizedBox(height: 10),
-              
+
                       // Restaurat name text field
                       TextFieldService(
                               controller: _controller.regWebsiteController,
@@ -152,19 +152,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   value: name, fieldName: "website url"),
                               hint: "Website Url")
                           .show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 15),
-              
+
                       // Seperator for title
                       Seperator(
                               text: "Enter Address Manually",
                               horizontalPadding: 0)
                           .show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 15),
-              
+
                       // Full address field
                       TextFieldService(
                               controller: _controller.regFullAddressController,
@@ -172,10 +172,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   value: address, fieldName: "full address"),
                               hint: "Full Address")
                           .show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 10),
-              
+
                       // City field
                       TextFieldService(
                               controller: _controller.regCityController,
@@ -183,10 +183,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   _validator(value: city, fieldName: "city"),
                               hint: "City")
                           .show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 10),
-              
+
                       // State field
                       TextFieldService(
                               controller: _controller.regStateController,
@@ -194,10 +194,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   _validator(value: state, fieldName: "state"),
                               hint: "State")
                           .show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 10),
-              
+
                       // State field
                       TextFieldService(
                               controller: _controller.regCountryController,
@@ -205,7 +205,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   value: country, fieldName: "country"),
                               hint: "Country")
                           .show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 10),
                       // State field
@@ -215,13 +215,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   value: pincode, fieldName: "pin code"),
                               hint: "Pin Code")
                           .show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 15),
-              
+
                       // Food type title seperator
                       Seperator(text: "Servings", horizontalPadding: 0).show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 15),
                       Obx(() => _controller.servings.isEmpty
@@ -257,10 +257,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             .show())),
                               ],
                             )),
-              
+
                       // Adding some space
                       const SizedBox(height: 10),
-              
+
                       // Add button
                       Align(
                           alignment: Alignment.centerRight,
@@ -272,16 +272,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 log(_controller.servings.length.toString());
                               },
                               child: const Icon(Icons.add))),
-              
+
                       // Adding some space
                       const SizedBox(height: 15),
-              
+
                       // Food type title seperator
                       Seperator(text: "Food Type", horizontalPadding: 0).show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 15),
-              
+
                       // Food type list = radio button
                       Column(
                         children: List.generate(
@@ -319,7 +319,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                               .foodType[index]
                                                       ? ColorManager.primary
                                                       : ColorManager.grey)),
-              
+
                                           // Food type selection radio button
                                           Radio(
                                               value:
@@ -336,17 +336,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               })
                                         ])))),
                       ),
-              
+
                       // Adding some space
                       const SizedBox(height: 15),
-              
+
                       // Restaurant timing title seperator
                       Seperator(text: "Restaurant Timing", horizontalPadding: 0)
                           .show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 15),
-              
+
                       // Restaurant open time field
                       TextFieldService(
                               controller: _controller.regOpenTimeController,
@@ -354,10 +354,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   value: openTime, fieldName: "opening time"),
                               hint: "Restaurant Open Time")
                           .show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 10),
-              
+
                       // Restaurant close time field
                       TextFieldService(
                               controller: _controller.regCloseTimeController,
@@ -365,19 +365,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   value: closetime, fieldName: "closing time"),
                               hint: "Restaurant Close Time")
                           .show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 15),
-              
+
                       // Open days title seperator
                       Seperator(
                               text: "Restaurant Open Days",
                               horizontalPadding: 0)
                           .show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 15),
-              
+
                       // List of  days  for restaurat open days selection
                       SizedBox(
                           width: Get.width,
@@ -427,13 +427,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               })),
                       // Adding some space
                       const SizedBox(height: 15),
-              
+
                       // Food type title seperator
                       Seperator(text: "Delivery", horizontalPadding: 0).show(),
-              
+
                       // Adding some space
                       const SizedBox(height: 15),
-              
+
                       //  Delivery switch button
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -450,7 +450,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   });
                                 })
                           ]),
-              
+
                       //  When switch value is on
                       _controller.deliverySwitch.value
                           ? Padding(
@@ -466,10 +466,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             fieldName: "delivery fee"),
                                         hint: "Delivery fee")
                                     .show(),
-              
+
                                 // Adding some space
                                 const SizedBox(height: 10),
-              
+
                                 // Minimum order  field
                                 TextFieldService(
                                         controller:
@@ -479,10 +479,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             fieldName: "minimum order"),
                                         hint: "Minimum order")
                                     .show(),
-              
+
                                 // Adding some space
                                 const SizedBox(height: 10),
-              
+
                                 // Estimated Time  field
                                 TextFieldService(
                                         controller: _controller
@@ -496,7 +496,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           :
                           //  when switch value is of
                           const SizedBox(),
-              
+
                       // Pick up switch button
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -513,7 +513,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   });
                                 })
                           ]),
-              
+
                       // If pick up is enable then show estimated time text field
                       _controller.pickUpSwitch.value == true
                           ? Padding(
@@ -528,12 +528,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   .show(),
                             )
                           : const SizedBox(),
-              
+
                       // Adding some space
                       const SizedBox(
                         height: 20,
                       ),
-              
+
                       // Register button
                       Obx(
                         () => _controller.registerLoading.value == true
@@ -543,16 +543,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     text: "Register")
                                 .elevated(),
                       ),
-              
+
                       // Adding some space
                       const SizedBox(height: 30),
-              
+
                       // putting divider section
                       Seperator(text: "or").show(),
-              
+
                       // give space
                       const SizedBox(height: 15),
-              
+
                       // register option
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -563,25 +563,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             // give space
                             const SizedBox(width: 5),
                             InkWell(
-                                onTap: () =>
-                                    Get.to(() => const LoginScreen()),
+                                onTap: () => Get.to(() => const LoginScreen()),
                                 child: Text("Log In Now",
                                     style: TextStyle(
                                         color: ColorManager.primary,
                                         fontSize: 13.5,
                                         fontWeight: FontWeight.bold)))
                           ]),
-              
+
                       // give space
                       const SizedBox(height: 30),
-              
+
                       //  continuing agree text
                       const Text("By continuing, you agree to our",
                           style: TextStyle(fontSize: 13)),
-              
+
                       // give space
                       const SizedBox(height: 6),
-              
+
                       // terms and conditions Options list
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,

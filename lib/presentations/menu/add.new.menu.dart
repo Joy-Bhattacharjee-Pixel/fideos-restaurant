@@ -1,6 +1,10 @@
-import 'package:fideos_restaurant/models/app_color.dart';
-import 'package:fideos_restaurant/utils/outlinebox.dart';
+
+import 'package:fideos_restaurant/controllers/menu.controller.dart';
+import 'package:fideos_restaurant/presentations/menu/add.dart';
+import 'package:fideos_restaurant/utils/button.dart';
+import 'package:fideos_restaurant/utils/text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddNewMenu extends StatefulWidget {
   const AddNewMenu({super.key});
@@ -10,6 +14,16 @@ class AddNewMenu extends StatefulWidget {
 }
 
 class _AddNewMenuState extends State<AddNewMenu> {
+
+  // Importing menu controller
+  final _controller = AddMenuController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.fetchmenudetails();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,65 +53,43 @@ class _AddNewMenuState extends State<AddNewMenu> {
         // Adding some space
         const SizedBox(height: 10),
 
-        // All new menu list
-        ...List.generate(
-            2,
-            (index) => Column(children: [
-                  Padding(
-                      padding: const EdgeInsets.only(
-                          left: 10.0, right: 10, bottom: 8),
-                      child: Column(children: [
-                        const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Veg Items",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13)),
+        // All new menu field
 
-                              // Item id
-                              Text("Id:1234",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13))
-                            ]),
+        // Name field
+        Padding(
+            padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+            child: TextFieldService(
+                    controller: _controller.menuNameController,
+                    validator: (name) =>
+                        _validator(value: name, fieldName: "Name"),
+                    hint: "Name")
+                .show()),
 
-                        // Adding some space
-                        const SizedBox(height: 2),
-
-                        //  Available total food
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text("10 food items available in this menu",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      // fontWeight: FontWeight.bold,
-                                      fontSize: 13)),
-                              index != 1
-                                  ? const Text("Enable",
-                                      style: TextStyle(
-                                          color: Colors.green,
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 13))
-                                  : Text("Disabled",
-                                      style: TextStyle(
-                                          color: ColorManager.primary,
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 13))
-                            ])
-                      ])),
-
-                  // Divider
-                  Divider(color: Colors.grey.withOpacity(0.2)),
-                ])),
+        // Description field
+        Padding(
+            padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+            child: TextFieldService(
+                    controller: _controller.menudescriptionController,
+                    validator: (description) => _validator(
+                        value: description, fieldName: "Description"),
+                    hint: "Description")
+                .show()),
 
         // Add new menu button
-        OutlineBoxManager(
-            text: "Add New Menu", color: ColorManager.primary, fontFamily: true)
+        Padding(
+            padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
+            child: ButtonManager(onPressed: () {
+              Get.to(()=>AddMenu());
+            }, text: "Add New Menu")
+                .elevated()),
       ]),
     )));
+  }
+
+  // Field validator
+  _validator({String? value, String? fieldName}) {
+    if (value == null || value.isEmpty) {
+      return "Please enter a valid $fieldName";
+    }
   }
 }

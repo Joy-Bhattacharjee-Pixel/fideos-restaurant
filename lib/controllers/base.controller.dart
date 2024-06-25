@@ -13,10 +13,6 @@ class BaseController extends GetxController {
     Icon(Feather.box),
     Icon(Icons.food_bank_outlined),
     Icon(Feather.user)
-    // Image.asset("assets/nav_icon_5.png", height: 25),
-    // Image.asset("assets/nav_icon_5.png", height: 25),
-    // Image.asset("assets/nav_icon_2.png", height: 25),
-    // Image.asset("assets/nav_icon_2.png", height: 25)
   ];
 
   // List of screen name
