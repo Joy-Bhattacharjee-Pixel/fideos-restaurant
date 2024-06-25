@@ -1,3 +1,7 @@
+import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
+import 'package:fideos_restaurant/service.dart';
+
 class Food {
   String? image;
   String? price;
@@ -26,7 +30,7 @@ class Food {
     id = json['id'];
     availability = json['availability'];
     status = json['status'];
-    menu = json['menu'] != null ?  Menu.fromJson(json['menu']) : null;
+    menu = json['menu'] != null ? Menu.fromJson(json['menu']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -44,14 +48,62 @@ class Food {
     return data;
   }
 
+  // Fetch all foods
+  allFoods({required String restaurantId}) async {
+    try {
+      // Preparing endpoint
+      const endpoint = "/foods/all";
 
-  // Fetch all foods 
-  allFoods({ required String restaurantId}) async{
-    // Preparing endpoint 
-    const endpoint  = "/foods/all"; 
+      // Preparing query params
+      final queryParams = {"restaurantId": restaurantId};
 
-    // Preparing query params
-    final queryParams = { "restaurantId": restaurantId };
+      // Fetching all foods
+      final response =
+          await APIClient().get(endpoint, queryParameters: queryParams);
+
+      // separate foods from response
+      List<dynamic> foods = response.data['foods'];
+
+      // parse this list of foods from map to food and return
+      return {"success": foods.map((food) => Food.fromJson(food)).toList()};
+    } on DioException catch (e) {
+      return {"error": e.response!.data["error"]};
+    }
+  }
+
+  // Add food function
+  addFood({required String restaurantId}) async {
+    // Trying to add food
+    try {
+      // Preparing endpoint
+      const endpoint = "/foods/create";
+
+      // Preparing body object
+      final dio.FormData formData = dio.FormData.fromMap({
+        "name": name,
+        "description": description,
+        "price": price,
+        "menu": "",
+        "restaurantId": restaurantId
+
+        // "file": dio.MultipartFile.fromBytes(uint8list ?? Uint8List(0),
+        //     filename: "${DateTime.now().millisecondsSinceEpoch}.jpg"),
+      });
+
+      Map<String, dynamic> body = {};
+
+      for (var element in formData.fields) {
+        body[element.key] = element.value;
+      }
+      // Fetching response
+      final response = await APIClient().post(endpoint, data: body);
+
+      return { 
+        "success": response.data[""]
+      };
+      } on DioException catch (e) {
+      return {"error": e.response!.data["error"]};
+    }
   }
 }
 
