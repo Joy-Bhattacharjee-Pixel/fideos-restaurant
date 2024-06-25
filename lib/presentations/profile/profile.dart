@@ -28,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
         backgroundColor: ColorManager.white,
         body: Obx(() => _controller.restaurantDetailsProcessing.value
-            ? Loader().show()
+            ? Center(child: Loader().show())
             : Center(
                 child: SingleChildScrollView(
                   child: Padding(
@@ -48,14 +48,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     image: AssetImage("assets/man.png")))),
 
                         // Restaurant name
-                        const Text("Anamika Jha",
+                        Text(
+                            _controller.restaurantData.value.name.toString() ??
+                                "Anamika Jha",
                             style: TextStyle(
                                 fontSize: 18,
                                 fontFamily: "Lexend",
                                 fontWeight: FontWeight.w500)),
 
                         // Restaurant email
-                        const Text("anamika@gmail.com",
+                        Text(
+                            _controller.restaurantData.value.email.toString() ??
+                                "anamika@gmail.com",
                             style: TextStyle(
                                 fontWeight: FontWeight.w500, fontSize: 15)),
 
@@ -75,16 +79,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         // Restaurant detail = name
                         _detail(
                             icon: const Icon(Icons.person),
-                            title: "Anamika Jha"),
+                            title: _controller.restaurantData.value.name
+                                    ??
+                                "Anamika Jha"),
 
                         // Restaurant detail = email
                         _detail(
-                            icon: const Icon(Icons.mail),
-                            title: "anmaika@gmail.com"),
+                          icon: const Icon(Icons.mail),
+                          title: _controller.restaurantData.value.email
+                                   ??
+                              "anamika@gmail.com",
+                        ),
 
                         // Restaurant detail = phone
                         _detail(
-                            icon: const Icon(Icons.phone), title: "786678988"),
+                            icon: const Icon(Icons.phone),
+                            title: _controller.restaurantData.value.phone
+                                    .toString() ??
+                                "786678988"),
 
                         // Restaurant detail
                         _detail(

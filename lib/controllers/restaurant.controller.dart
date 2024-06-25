@@ -40,8 +40,6 @@ class RestaurantController extends GetxController {
       restaurantData.value = Restaurant.fromJson(fetchDetailsResponse["success"]);
 
 
-      // navigate get to
-      Get.to(() =>const ProfileScreen());
     }
     // Stop loader for resturant Details
     restaurantDetailsProcessing.value = false;

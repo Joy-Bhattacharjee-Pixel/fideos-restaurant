@@ -233,7 +233,49 @@ class Restaurant {
       return {"error": e.response!.data["error"]};
     }
   }
+
+// Add menu function
+  addmenu() async {
+    try {
+      const String endpoint = "/menus/create";
+
+      final Map<String, dynamic> body = {
+        "restaurantId": id,
+        "name": name,
+        "description": description,
+      };
+
+      final response = await APIClient().post(endpoint, data: body);
+
+      return {
+        "success": response.data["menu"]
+      };
+    } on DioException catch (e) {
+      return {"error": e.response!.data["error"]};
+    }
+  }
+
+
+// Fetch Menu
+    Future<Map<String, dynamic>> fetchmenu({required String id}) async {
+    try {
+      // Preparing end point
+      const endpoint = "/menus/all";
+      // Preparing query parameters
+      final params = {"restaurantId": id};
+      // Fetching response
+      final response = await APIClient().get(endpoint, queryParameters: params);
+      // returning response as success
+      return {
+        "success": response.data["menus"]
+      };
+      // returning response as failed
+    } on DioException catch (e) {
+      return {"error": e.response!.data["error"]};
+    }
+  }
 }
+
 
 class Address {
   String? fullAddress;
