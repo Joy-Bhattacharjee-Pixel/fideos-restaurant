@@ -20,7 +20,7 @@ class AddMenuController extends GetxController {
   RxBool menucreateLoading = false.obs;
 
   // Add menu function
- addmenudetails() async {
+ addMenu() async {
     // Restaurant create menu process start
     menucreateLoading.value = true;
 
@@ -63,7 +63,7 @@ class AddMenuController extends GetxController {
     final id = await CookieManager("id").get();
     log(id.toString());
 
-    final fetchMenuResponse = await restaurant.fetchmenu(id: id.toString());
+    final fetchMenuResponse = await restaurant.fetchmenu(restaurantId: id.toString());
 
     // if response error
     if (fetchMenuResponse["error"] != null) {

@@ -260,12 +260,12 @@ class Restaurant {
 
 
 // Fetch Menu
-    Future<Map<String, dynamic>> fetchmenu({required String id}) async {
+    Future<Map<String, dynamic>> fetchmenu({required String restaurantId}) async {
     try {
       // Preparing end point
       const endpoint = "/menus/all";
       // Preparing query parameters
-      final params = {"restaurantId": id};
+      final params = {"restaurantId": restaurantId};
       // Fetching response
       final response = await APIClient().get(endpoint, queryParameters: params);
       // returning response as success

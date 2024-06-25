@@ -83,11 +83,10 @@ class Food {
         "name": name,
         "description": description,
         "price": price,
-        "menu": "",
-        "restaurantId": restaurantId
-
-        // "file": dio.MultipartFile.fromBytes(uint8list ?? Uint8List(0),
-        //     filename: "${DateTime.now().millisecondsSinceEpoch}.jpg"),
+        "menu": menu!.id,
+        "restaurantId": restaurantId,
+        "file": dio.MultipartFile.fromFile(image ?? "",
+            filename: "${DateTime.now().millisecondsSinceEpoch}.jpg"),
       });
 
       Map<String, dynamic> body = {};
@@ -98,10 +97,8 @@ class Food {
       // Fetching response
       final response = await APIClient().post(endpoint, data: body);
 
-      return { 
-        "success": response.data[""]
-      };
-      } on DioException catch (e) {
+      return {"success": response.data["success"]};
+    } on DioException catch (e) {
       return {"error": e.response!.data["error"]};
     }
   }
