@@ -16,13 +16,13 @@ class AddMenuController extends GetxController {
   // Fetch menu button loading
   RxBool fetchmenuLoading = false.obs;
 
-  // Create menu button loading
-  RxBool menucreateLoading = false.obs;
+  // Add menu button loading
+  RxBool menuaddLoading = false.obs;
 
   // Add menu function
  addMenu() async {
     // Restaurant create menu process start
-    menucreateLoading.value = true;
+    menuaddLoading.value = true;
 
     // Create menu class instance
     final Restaurant restaurant = Restaurant(
@@ -49,7 +49,7 @@ class AddMenuController extends GetxController {
     }
 
     // Restaurant create menu process successfully
-    menucreateLoading.value = false;
+    menuaddLoading.value = false;
   }
 
 // Fetching Menu Details
