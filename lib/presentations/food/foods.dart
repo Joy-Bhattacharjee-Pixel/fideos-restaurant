@@ -4,7 +4,6 @@ import 'package:fideos_restaurant/presentations/food/add.dart';
 import 'package:fideos_restaurant/presentations/food/food.details.dart';
 import 'package:fideos_restaurant/utils/button.dart';
 import 'package:fideos_restaurant/utils/loader.dart';
-import 'package:fideos_restaurant/utils/outlinebox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

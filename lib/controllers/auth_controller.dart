@@ -3,7 +3,6 @@ import 'package:fideos_restaurant/presentations/base/base_screen.dart';
 import 'package:fideos_restaurant/models/restaurant.dart';
 import 'package:fideos_restaurant/presentations/auth/email_verify_screen.dart';
 import 'package:fideos_restaurant/presentations/auth/login_screen.dart';
-import 'package:fideos_restaurant/presentations/auth/register_screen.dart';
 import 'package:fideos_restaurant/presentations/auth/reset_password.dart';
 import 'package:fideos_restaurant/presentations/auth/verify_otp.dart';
 import 'package:fideos_restaurant/utils/cookies.dart';

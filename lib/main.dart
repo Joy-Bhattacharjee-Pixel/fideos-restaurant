@@ -1,5 +1,11 @@
 import 'package:fideos_restaurant/models/app_color.dart';
+import 'package:fideos_restaurant/presentations/base/base_screen.dart';
+import 'package:fideos_restaurant/presentations/food/add.dart';
+import 'package:fideos_restaurant/presentations/food/food.details.dart';
+import 'package:fideos_restaurant/presentations/food/foods.dart';
 import 'package:fideos_restaurant/presentations/menu/add.new.menu.dart';
+import 'package:fideos_restaurant/presentations/profile/edit.profile.dart';
+import 'package:fideos_restaurant/presentations/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,6 +27,6 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
             fontFamily: "Lexend",
             primaryColor: ColorManager.primary),
-        home: const AddNewMenu());
+        home: const SplashScreen());
   }
 }
