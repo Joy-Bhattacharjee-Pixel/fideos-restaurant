@@ -5,16 +5,20 @@ import 'package:fideos_restaurant/utils/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProductDetails extends StatefulWidget {
-  const ProductDetails({super.key});
+class FoodDetails extends StatefulWidget {
+  const FoodDetails({super.key});
 
   @override
-  State<ProductDetails> createState() => _ProductDetailsState();
+  State<FoodDetails> createState() => _FoodDetailsState();
 }
 
-class _ProductDetailsState extends State<ProductDetails> {
+class _FoodDetailsState extends State<FoodDetails> {
+  // // Importing controller
+  // final _controller = Get.put(FoodController());
+
   // Importing auth controller
-  final _controller = AuthController();
+  final _authController = AuthController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +61,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
               child: TextFieldService(
-                      controller: _controller.productNameController,
+                      controller: _authController.productNameController,
                       validator: (pName) =>
                           _validator(value: pName, fieldName: "Product Name"),
                       hint: "Enter Product Name")
@@ -68,7 +72,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
               child: TextField(
-                  controller: _controller.reasonRejectController,
+                  controller: _authController.reasonRejectController,
                   maxLines: 6,
                   decoration: InputDecoration(
                       hintText: "Provide detailed reason to reject this order",
@@ -110,7 +114,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
               child: TextFieldService(
-                      controller: _controller.newTagController,
+                      controller: _authController.newTagController,
                       validator: (nTag) =>
                           _validator(value: nTag, fieldName: "New Tag"),
                       hint: "Add New Tag")
@@ -148,7 +152,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
             child: TextFieldService(
-                    controller: _controller.newMenuController,
+                    controller: _authController.newMenuController,
                     validator: (nMenu) =>
                         _validator(value: nMenu, fieldName: "New Menu"),
                     hint: "Add new menu")
@@ -159,7 +163,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
             child: TextFieldService(
-                    controller: _controller.offerPriceController,
+                    controller: _authController.offerPriceController,
                     validator: (oPrice) =>
                         _validator(value: oPrice, fieldName: "Offer Price"),
                     hint: "Offer Price")
@@ -170,7 +174,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5),
             child: TextFieldService(
-                    controller: _controller.actualPriceController,
+                    controller: _authController.actualPriceController,
                     validator: (aPrice) =>
                         _validator(value: aPrice, fieldName: "Actual Price"),
                     hint: "Actual Price")

@@ -1,12 +1,12 @@
 import 'dart:developer';
 
-import 'package:fideos_restaurant/models/restaurant.dart';
+import 'package:fideos_restaurant/models/menu.dart';
 import 'package:fideos_restaurant/utils/cookies.dart';
 import 'package:fideos_restaurant/utils/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AddMenuController extends GetxController {
+class RestaurantMenuController extends GetxController {
   // Name field controller for menu screen
   final TextEditingController menuNameController = TextEditingController();
   // Description field controller for menu screen
@@ -14,23 +14,26 @@ class AddMenuController extends GetxController {
       TextEditingController();
 
   // Fetch menu button loading
-  RxBool fetchmenuLoading = false.obs;
+  RxBool menuLoading = false.obs;
 
   // Add menu button loading
   RxBool menuaddLoading = false.obs;
 
+  // List of menu model
+  RxList<Menu> menus = <Menu>[].obs;
+
   // Add menu function
- addMenu() async {
+  addMenu() async {
     // Restaurant create menu process start
     menuaddLoading.value = true;
 
     // Create menu class instance
-    final Restaurant restaurant = Restaurant(
+    final Menu menu = Menu(
         name: menuNameController.text.trim(),
         description: menudescriptionController.text.trim());
 
     // Create restaurat function from the class
-    final addresponse = await restaurant.addmenu();
+    final addresponse = await menu.addmenu();
 
     // Check for error in the response
     if (addresponse["error"] != null) {
@@ -53,30 +56,67 @@ class AddMenuController extends GetxController {
   }
 
 // Fetching Menu Details
-  fetchmenudetails() async {
-    // Starting loader for menu Details
-    fetchmenuLoading.value = true;
+  // fetchmenudetails() async {
+  //   // Starting loader for menu Details
+  //   fetchmenuLoading.value = true;
 
-    // Creating restaurat
-    final restaurant = Restaurant();
+  //   // Creating menu isntance
+  //   final menu = Menu();
+  //   // Fetching id from the saved cookieManager
+  //   final id = await CookieManager("id").get();
+  //   log(id.toString());
+
+  //   final fetchMenuResponse = await menu.fetchmenu(restaurantId: id.toString());
+
+  //   // if response error
+  //   if (fetchMenuResponse["error"] != null) {
+  //     // Showing error maessage
+  //     FlashManager().show(fetchMenuResponse["error"]);
+  //     // If response success
+  //   } else if (fetchMenuResponse["success"] != null) {
+  //     // Assigning all menu coming from response to model = List of menu model
+  //     menus.assignAll(fetchMenuResponse["Success"]);
+
+  //     // Refreshing list of menu
+  //     menus.refresh();
+  //     // Showing error maessage
+  //     FlashManager().show("Fetch Menu successfully");
+  //   }
+  //   // Stop loader for menu Details
+  //   fetchmenuLoading.value = false;
+  // }
+   // Fetching all foods
+  allMenus() async {
+    // Stating loader for menu fetch
+    menuLoading.value = true;
+
+    // Creating new menu model
+    final menu = Menu();
+
     // Fetching id from the saved cookieManager
     final id = await CookieManager("id").get();
-    log(id.toString());
 
-    final fetchMenuResponse = await restaurant.fetchmenu(restaurantId: id.toString());
+    // Fetching all menus using food model
+    final menuResponse = await menu.fetchmenu(restaurantId: id!);
 
     // if response error
-    if (fetchMenuResponse["error"] != null) {
+    if (menuResponse["error"] != null) {
       // Showing error maessage
-      FlashManager().show(fetchMenuResponse["error"]);
-      // If response success
-    } else if (fetchMenuResponse["success"] != null) {
-      // Showing error maessage
-      FlashManager().show("Fetch Menu successfully");
+      FlashManager().show(menuResponse["error"]);
+    } else if (menuResponse["success"] != null) {
+      // When resposne is not null
+      menus.assignAll(menuResponse["success"]);
 
-      log(fetchMenuResponse["success"].toString());
+      // Refreshing menus
+      menus.refresh();
+      // Showing error maessage
+      FlashManager().show("Menus fetched successfully");
     }
-    // Stop loader for menu Details
-    fetchmenuLoading.value = false;
+
+    // Stopping loader for menu loading
+    menuLoading.value = false;
   }
+
+
+
 }

@@ -16,12 +16,12 @@ class AddNewMenu extends StatefulWidget {
 class _AddNewMenuState extends State<AddNewMenu> {
 
   // Importing menu controller
-  final _controller = AddMenuController();
+  final _controller = RestaurantMenuController();
 
   @override
   void initState() {
     super.initState();
-    _controller.fetchmenudetails();
+    _controller.menuLoading();
   }
 
   @override

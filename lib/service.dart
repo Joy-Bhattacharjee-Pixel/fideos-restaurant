@@ -7,7 +7,7 @@ class APIClient {
     return await dio.get<T>(path, queryParameters: queryParameters);
   }
 
-  Future<Response<T>> post<T>(String path, {Map<String, dynamic>? data}) async {
+  Future<Response<T>> post<T>(String path, {dynamic data}) async {
     return await dio.post<T>(path, data: data);
   }
 

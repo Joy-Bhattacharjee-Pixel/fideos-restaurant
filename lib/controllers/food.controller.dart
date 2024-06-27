@@ -19,7 +19,7 @@ class FoodController extends GetxController {
   final priceController = TextEditingController();
 
   // list of restaurant images
-  final RxString selectedImage = "".obs;
+  final RxString   selectedImage = "".obs;
 
   // Boolean value for food loading
   RxBool foodLoading = false.obs;
@@ -30,16 +30,18 @@ class FoodController extends GetxController {
   // List of food model
   RxList<Food> foods = <Food>[].obs;
 
+  // Selected menu
+  RxString selectedMenu = "".obs;
+
+  RxString selectedMenuId = "".obs;
+
   // Fetching all foods
   allFoods() async {
     // Stating loader for food fetch
     foodLoading.value = true;
 
     // Creating new food model
-    final food = Food(
-      name: nameController.text.trim(),
-      description: descriptionController.text.trim(),
-    );
+    final food = Food();
 
     // Fetching id from the saved cookieManager
     final id = await CookieManager("id").get();
@@ -60,35 +62,40 @@ class FoodController extends GetxController {
       // Showing error maessage
       FlashManager().show("Foods fetched successfully");
     }
-    
+
     // Stopping loader for food loading
     foodLoading.value = false;
   }
 
   // Add menu
-  addMenu() async {
+  addFood() async {
     // Starting food adding loader
     foodAdding.value = true;
 
     // Creating new food instance
-    final food = Food();
+    final food = Food(
+        name: nameController.text.trim(),
+        description: descriptionController.text.trim(),
+        price: priceController.text.trim(),
+        menu: Menu(id: selectedMenuId.value.toString()),
+        availability: "true",
+        image: selectedImage.value.toString());
 
     // Fetching id from the saved cookieManager
     final id = await CookieManager("id").get();
 
     // Adding food using model
-    final foodResponse = await food.addFood(restaurantId: id!);
+    final foodResponse = await food.addFood(restaurantId: id.toString());
 
     // if response error
     if (foodResponse["error"] != null) {
       // Showing error maessage
       FlashManager().show(foodResponse["error"]);
     } else if (foodResponse["success"] != null) {
-
       // Refreshing foods
       foods.refresh();
       // Showing error maessage
-      FlashManager().show("Foods fetched successfully");
+      FlashManager().show(foodResponse["success"]);
     }
 
     // Stopping food adding loader

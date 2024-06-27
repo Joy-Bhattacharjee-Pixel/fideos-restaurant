@@ -19,18 +19,16 @@ class DropDownManager {
           child: Text(hint, style: TextStyle(color: ColorManager.grey)),
         ),
         decoration: InputDecoration(
-          border: _border,
-          enabledBorder: _border,
-          filled: false,
-          hintText: hint,
-          label: Text(hint)
-        ),
-        
+            border: _border,
+            enabledBorder: _border,
+            filled: false,
+            hintText: hint,
+            label: Text(hint)),
         value: value,
         items: List.generate(
             items.length, (index) => menuItem(item: items[index])),
         onChanged: (value) {
-          onChanged;
+          onChanged(value ?? "");
         },
       );
 

@@ -1,3 +1,4 @@
+
 import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 import 'package:fideos_restaurant/service.dart';
@@ -77,16 +78,18 @@ class Food {
     try {
       // Preparing endpoint
       const endpoint = "/foods/create";
-
       // Preparing body object
       final dio.FormData formData = dio.FormData.fromMap({
         "name": name,
         "description": description,
         "price": price,
-        "menu": menu!.id,
+        "menu": menu,
+        "availability": availability,
         "restaurantId": restaurantId,
-        "file": dio.MultipartFile.fromFile(image ?? "",
-            filename: "${DateTime.now().millisecondsSinceEpoch}.jpg"),
+        "files": await dio.MultipartFile.fromFile(
+          image ?? "",
+          filename: "${DateTime.now().millisecondsSinceEpoch}.jpg",
+        ),
       });
 
       Map<String, dynamic> body = {};
@@ -94,8 +97,9 @@ class Food {
       for (var element in formData.fields) {
         body[element.key] = element.value;
       }
+
       // Fetching response
-      final response = await APIClient().post(endpoint, data: body);
+      final response = await APIClient().post(endpoint, data: formData);
 
       return {"success": response.data["success"]};
     } on DioException catch (e) {
