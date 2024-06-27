@@ -83,7 +83,7 @@ class Food {
         "name": name,
         "description": description,
         "price": price,
-        "menu": menu,
+        "menu": menu!.id,
         "availability": availability,
         "restaurantId": restaurantId,
         "files": await dio.MultipartFile.fromFile(
@@ -91,12 +91,6 @@ class Food {
           filename: "${DateTime.now().millisecondsSinceEpoch}.jpg",
         ),
       });
-
-      Map<String, dynamic> body = {};
-
-      for (var element in formData.fields) {
-        body[element.key] = element.value;
-      }
 
       // Fetching response
       final response = await APIClient().post(endpoint, data: formData);
