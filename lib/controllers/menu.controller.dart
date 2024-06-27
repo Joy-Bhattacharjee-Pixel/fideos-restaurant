@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:fideos_restaurant/models/menu.dart';
+import 'package:fideos_restaurant/presentations/menu/add.dart';
 import 'package:fideos_restaurant/utils/cookies.dart';
 import 'package:fideos_restaurant/utils/flash.dart';
 import 'package:flutter/material.dart';
@@ -27,13 +28,16 @@ class RestaurantMenuController extends GetxController {
     // Restaurant create menu process start
     menuaddLoading.value = true;
 
+    // Fetching id from the saved cookieManager
+    final id = await CookieManager("id").get();
+    log(id.toString());
     // Create menu class instance
     final Menu menu = Menu(
         name: menuNameController.text.trim(),
         description: menudescriptionController.text.trim());
 
     // Create restaurat function from the class
-    final addresponse = await menu.addmenu();
+    final addresponse = await menu.addmenu(id: id!);
 
     // Check for error in the response
     if (addresponse["error"] != null) {
@@ -43,12 +47,14 @@ class RestaurantMenuController extends GetxController {
     // Check for success in the response
     if (addresponse["success"] != null) {
       log(addresponse["success"].toString());
+      // menus.assignAll();
+      // Refreshing menus
+      allMenus();
 
       // Add new menu successfully - show this message
       FlashManager().show("Add new menu successfully");
-
       // Navigate to the screen
-      Get.to(() => Container());
+      Get.back();
     }
 
     // Restaurant create menu process successfully
@@ -85,7 +91,7 @@ class RestaurantMenuController extends GetxController {
   //   // Stop loader for menu Details
   //   fetchmenuLoading.value = false;
   // }
-   // Fetching all foods
+  // Fetching all foods
   allMenus() async {
     // Stating loader for menu fetch
     menuLoading.value = true;
@@ -116,7 +122,4 @@ class RestaurantMenuController extends GetxController {
     // Stopping loader for menu loading
     menuLoading.value = false;
   }
-
-
-
 }

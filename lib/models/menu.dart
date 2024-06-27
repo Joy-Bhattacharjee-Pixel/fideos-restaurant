@@ -26,7 +26,7 @@ class Menu {
   }
 
   // Add menu function
-  addmenu() async {
+  addmenu({ required String id}) async {
     try {
       const String endpoint = "/menus/create";
 

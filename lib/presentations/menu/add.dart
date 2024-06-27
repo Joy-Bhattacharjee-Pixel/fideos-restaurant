@@ -1,6 +1,10 @@
+import 'package:fideos_restaurant/controllers/menu.controller.dart';
 import 'package:fideos_restaurant/models/app_color.dart';
+import 'package:fideos_restaurant/presentations/menu/add.new.menu.dart';
+import 'package:fideos_restaurant/utils/loader.dart';
 import 'package:fideos_restaurant/utils/outlinebox.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddMenu extends StatefulWidget {
   const AddMenu({super.key});
@@ -10,6 +14,12 @@ class AddMenu extends StatefulWidget {
 }
 
 class _AddMenuState extends State<AddMenu> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  final _controller = RestaurantMenuController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +78,6 @@ class _AddMenuState extends State<AddMenu> {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-
                             const Text("10 food items available in this menu",
                                 style: TextStyle(
                                     color: Colors.black,
@@ -93,8 +102,16 @@ class _AddMenuState extends State<AddMenu> {
               ])),
 
       // Add new menu button
-      OutlineBoxManager(
-          text: "Add New Menu", color: ColorManager.primary, fontFamily: true)
+
+      Obx(() => _controller.menuLoading.value
+          ? Loader().show()
+          : OutlineBoxManager(
+              onTap: () {
+                Get.to(() => AddNewMenu());
+              },
+              text: "Add New Menu",
+              color: ColorManager.primary,
+              fontFamily: true))
     ])));
   }
 }

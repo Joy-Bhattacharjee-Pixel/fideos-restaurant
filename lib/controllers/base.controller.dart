@@ -1,3 +1,5 @@
+import 'package:fideos_restaurant/presentations/menu/add.dart';
+import 'package:fideos_restaurant/presentations/menu/add.new.menu.dart';
 import 'package:fideos_restaurant/presentations/order/order_screen.dart';
 import 'package:fideos_restaurant/presentations/food/foods.dart';
 import 'package:fideos_restaurant/presentations/profile/profile.dart';
@@ -22,7 +24,8 @@ class BaseController extends GetxController {
   List<Widget> screens = [
     const OrderScreen(),
     const OrderScreen(),
-    const FoodScreen(),
+    // const FoodScreen(),
+    AddMenu(),
     const ProfileScreen()
   ];
 

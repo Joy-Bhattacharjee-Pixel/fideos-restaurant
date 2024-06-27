@@ -21,7 +21,7 @@ class _AddNewMenuState extends State<AddNewMenu> {
   @override
   void initState() {
     super.initState();
-    _controller.menuLoading();
+ 
   }
 
   @override
@@ -79,7 +79,9 @@ class _AddNewMenuState extends State<AddNewMenu> {
         Padding(
             padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
             child: ButtonManager(onPressed: () {
-              Get.to(()=>AddMenu());
+              // Get.to(()=>AddMenu());
+                 // _controller.menuLoading();
+                      _controller.addMenu();
             }, text: "Add New Menu")
                 .elevated()),
       ]),
