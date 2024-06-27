@@ -46,9 +46,12 @@ class _FoodScreenState extends State<FoodScreen> {
             style: TextStyle(fontSize: 13, color: Colors.black)),
 
         // Add food button
-        ButtonManager(onPressed: () { 
-          Get.to(() => const AddFoodScreen());
-        }, text: "Add Food").outline(),
+        ButtonManager(
+                onPressed: () {
+                  Get.to(() => const AddFoodScreen());
+                },
+                text: "Add Food")
+            .outline(),
 
         // Adding some space
         const SizedBox(height: 10),
@@ -58,139 +61,140 @@ class _FoodScreenState extends State<FoodScreen> {
             ? Center(child: Loader().show())
             : Expanded(
                 child: SingleChildScrollView(
-                  child: Column(
-                      children: List.generate(
-                          _controller.foods.length,
-                          (index) => GestureDetector(
-                              onTap: () {
-                                Get.to(() => const FoodDetails());
-                              },
-                              child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 5, horizontal: 5),
-                                  margin: const EdgeInsets.symmetric(vertical: 5),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      border: Border.all(
-                                          color: Colors.grey.withOpacity(0.2))),
-                                  child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        //  Product image
-                                        SizedBox(
-                                            height: 120,
-                                            width: 95,
-                                            child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                child: Image.network(
-                                                    _controller.foods[index].image
-                                                        .toString(),
-                                                    fit: BoxFit.cover))),
-                  
-                                        // Giving some space
-                                        const SizedBox(width: 7),
-                  
-                                        // Product details
-                                        Expanded(
-                                          child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      // Product name
-                                                      Text(
-                                                          _controller
-                                                              .foods[index].name
-                                                              .toString(),
-                                                          softWrap: true,
-                                                          style: const TextStyle(
-                                                              fontSize: 13,
-                                                              fontWeight:
-                                                                  FontWeight.bold,
-                                                              color:
-                                                                  Colors.black)),
-                  
-                                                      // Giving some space
-                                                      const SizedBox(width: 20),
-                  
-                                                      // Best seller tag
-                                                      Text("Best Seller",
-                                                          softWrap: true,
-                                                          style: TextStyle(
-                                                              fontSize: 11,
-                                                              fontWeight:
-                                                                  FontWeight.bold,
-                                                              color: ColorManager
-                                                                  .primary))
-                                                    ]),
-                  
-                                                // Food description
-                                                SizedBox(
-                                                    width: Get.width * 0.65,
-                                                    child: Text(
-                                                        _controller.foods[index]
-                                                            .description
+                child: Column(
+                    children: List.generate(
+                        _controller.foods.length,
+                        (index) => GestureDetector(
+                            onTap: () {
+                              Get.to(() => const FoodDetails());
+                            },
+                            child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 5, horizontal: 5),
+                                margin: const EdgeInsets.symmetric(vertical: 5),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    border: Border.all(
+                                        color: Colors.grey.withOpacity(0.2))),
+                                child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      //  Product image
+                                      SizedBox(
+                                          height: 120,
+                                          width: 95,
+                                          child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              child: Image.network(
+                                                  _controller.foods[index].image
+                                                      .toString(),
+                                                  fit: BoxFit.cover))),
+
+                                      // Giving some space
+                                      const SizedBox(width: 7),
+
+                                      // Product details
+                                      Expanded(
+                                        child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    // Product name
+                                                    Text(
+                                                        _controller
+                                                            .foods[index].name
                                                             .toString(),
                                                         softWrap: true,
                                                         style: const TextStyle(
-                                                            overflow: TextOverflow
-                                                                .ellipsis,
-                                                            fontSize: 12,
+                                                            fontSize: 13,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                             color:
-                                                                Colors.black87))),
-                  
-                                                // Giving some space
-                                                const SizedBox(height: 3),
-                  
-                                                // Restuarant  name
-                                                const Text("Kolkata Biryani",
+                                                                Colors.black)),
+
+                                                    // Giving some space
+                                                    const SizedBox(width: 20),
+
+                                                    // Best seller tag
+                                                    Text("Best Seller",
+                                                        softWrap: true,
+                                                        style: TextStyle(
+                                                            fontSize: 11,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: ColorManager
+                                                                .primary))
+                                                  ]),
+
+                                              // Food description
+                                              SizedBox(
+                                                  width: Get.width * 0.65,
+                                                  child: Text(
+                                                      _controller.foods[index]
+                                                          .description
+                                                          .toString(),
+                                                      softWrap: true,
+                                                      style: const TextStyle(
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          fontSize: 12,
+                                                          color:
+                                                              Colors.black87))),
+
+                                              // Giving some space
+                                              const SizedBox(height: 3),
+
+                                              // Restuarant  name
+                                              const Text("Kolkata Biryani",
+                                                  softWrap: true,
+                                                  style: TextStyle(
+                                                      fontSize: 12.5,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black)),
+
+                                              // Giving some space
+                                              const SizedBox(height: 3),
+
+                                              // Food price
+                                              Row(children: [
+                                                // Discounted price
+                                                Text(
+                                                    "\$${_controller.foods[index].price}",
                                                     softWrap: true,
                                                     style: TextStyle(
-                                                        fontSize: 12.5,
+                                                        fontSize: 13,
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                        color: Colors.black)),
-                  
+                                                        color: ColorManager
+                                                            .black)),
+
                                                 // Giving some space
-                                                const SizedBox(height: 3),
-                  
-                                                // Food price
-                                                Row(children: [
-                                                  // Discounted price
-                                                  Text("\$${_controller.foods[index].price}",
-                                                      softWrap: true,
-                                                      style: TextStyle(
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: ColorManager
-                                                              .black)),
-                  
-                                                  // Giving some space
-                                                  const SizedBox(width: 5),
-                  
-                                                  // Original price
-                                                  const Text("\$300",
-                                                      softWrap: true,
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .lineThrough,
-                                                          color: Colors.black))
-                                                ])
-                                              ]),
-                                        )
-                                      ]))))),
-                )))
+                                                const SizedBox(width: 5),
+
+                                                // Original price
+                                                const Text("\$300",
+                                                    softWrap: true,
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        decoration:
+                                                            TextDecoration
+                                                                .lineThrough,
+                                                        color: Colors.black))
+                                              ])
+                                            ]),
+                                      )
+                                    ]))))),
+              )))
       ]),
     );
   }

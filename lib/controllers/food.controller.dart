@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:fideos_restaurant/models/food.dart';
+import 'package:fideos_restaurant/presentations/food/foods.dart';
 import 'package:fideos_restaurant/utils/cookies.dart';
 import 'package:fideos_restaurant/utils/flash.dart';
 import 'package:flutter/widgets.dart';
@@ -19,7 +20,7 @@ class FoodController extends GetxController {
   final priceController = TextEditingController();
 
   // list of restaurant images
-  final RxString   selectedImage = "".obs;
+  final RxString selectedImage = "".obs;
 
   // Boolean value for food loading
   RxBool foodLoading = false.obs;
@@ -76,7 +77,7 @@ class FoodController extends GetxController {
     final food = Food(
         name: nameController.text.trim(),
         description: descriptionController.text.trim(),
-        price: priceController.text.trim(),
+        price: priceController.text.trim().toString(),
         menu: Menu(id: selectedMenuId.value.toString()),
         availability: "true",
         image: selectedImage.value.toString());
@@ -92,10 +93,13 @@ class FoodController extends GetxController {
       // Showing error maessage
       FlashManager().show(foodResponse["error"]);
     } else if (foodResponse["success"] != null) {
-      // Refreshing foods
-      foods.refresh();
       // Showing error maessage
       FlashManager().show(foodResponse["success"]);
+      
+      // Refreshing foods
+      foods.refresh();
+      // Navigating to list screen
+      Get.back();
     }
 
     // Stopping food adding loader
