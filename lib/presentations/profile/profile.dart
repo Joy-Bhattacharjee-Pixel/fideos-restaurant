@@ -51,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               // Restaurant name
                               Text(
                                   _controller.restaurantData.value.name
-                                          .toString() ??
+                                          ??
                                       "Anamika Jha",
                                   style:const TextStyle(
                                       fontSize: 18,
@@ -61,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               // Restaurant email
                               Text(
                                   _controller.restaurantData.value.email
-                                          .toString() ??
+                                      ??
                                       "anamika@gmail.com",
                                   style:const TextStyle(
                                       fontWeight: FontWeight.w500,
@@ -76,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   child: ButtonManager(
                                           onPressed: () {
                                             Get.to(() =>
-                                                 EditProfileScreen());
+                                               const  EditProfileScreen());
                                           },
                                           text: "Edit Profile")
                                       .elevated()),
@@ -102,7 +102,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               _detail(
                                   icon: const Icon(Icons.phone),
                                   title: _controller.restaurantData.value.phone
-                                          .toString() ??
+                                        ??
                                       "786678988"),
 
                               // Restaurant detail
