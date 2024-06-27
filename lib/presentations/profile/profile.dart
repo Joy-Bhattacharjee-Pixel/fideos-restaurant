@@ -51,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Text(
                             _controller.restaurantData.value.name.toString() ??
                                 "Anamika Jha",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 18,
                                 fontFamily: "Lexend",
                                 fontWeight: FontWeight.w500)),
@@ -60,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Text(
                             _controller.restaurantData.value.email.toString() ??
                                 "anamika@gmail.com",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.w500, fontSize: 15)),
 
                         // Adding some space
@@ -79,15 +79,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         // Restaurant detail = name
                         _detail(
                             icon: const Icon(Icons.person),
-                            title: _controller.restaurantData.value.name
-                                    ??
+                            title: _controller.restaurantData.value.name ??
                                 "Anamika Jha"),
 
                         // Restaurant detail = email
                         _detail(
                           icon: const Icon(Icons.mail),
-                          title: _controller.restaurantData.value.email
-                                   ??
+                          title: _controller.restaurantData.value.email ??
                               "anamika@gmail.com",
                         ),
 

@@ -22,7 +22,7 @@ class _FoodScreenState extends State<FoodScreen> {
   @override
   void initState() {
     super.initState();
-
+      _controller.foods.refresh();
     _allFoods();
   }
 
