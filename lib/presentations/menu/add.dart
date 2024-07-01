@@ -17,6 +17,7 @@ class _AddMenuState extends State<AddMenu> {
   @override
   void initState() {
     super.initState();
+    _controller.allMenus();
   }
 
   final _controller = RestaurantMenuController();
@@ -24,94 +25,101 @@ class _AddMenuState extends State<AddMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-            child: Column(children: [
-      // Title
-      const Text("Domino's Pizza",
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.black, fontSize: 21)),
+            child: SingleChildScrollView(
+      child: Column(children: [
+        // Title
+        const Text("Domino's Pizza",
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.black, fontSize: 21)),
 
-      // Sub title
-      const Text("Saltlake Sector 3, Bidhannagar, Kolkata",
-          textAlign: TextAlign.center,
-          softWrap: true,
-          style: TextStyle(fontSize: 13, color: Colors.black)),
+        // Sub title
+        const Text("Saltlake Sector 3, Bidhannagar, Kolkata",
+            textAlign: TextAlign.center,
+            softWrap: true,
+            style: TextStyle(fontSize: 13, color: Colors.black)),
 
-      // Adding some space
-      const SizedBox(height: 15),
+        // Adding some space
+        const SizedBox(height: 15),
 
-      // Divider
-      Divider(color: Colors.grey.withOpacity(0.2)),
+        // Divider
+        Divider(color: Colors.grey.withOpacity(0.2)),
 
-      // Adding some space
-      const SizedBox(height: 10),
+        // Adding some space
+        const SizedBox(height: 10),
 
-      // All new menu list
-      ...List.generate(
-          2,
-          (index) => Column(children: [
-                Padding(
-                    padding:
-                        const EdgeInsets.only(left: 10.0, right: 10, bottom: 8),
-                    child: Column(children: [
-                      const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Veg Items",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13)),
+        Obx(() => _controller.menuLoading.value
+            ? Loader().show()
+            : Column(
+                children: [
+                  ...List.generate(
+                      _controller.menus.length,
+                      (index) => Column(children: [
+                            Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10.0, right: 10, bottom: 8),
+                                child: Column(children: [
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                            _controller.menus[index].name
+                                                .toString(),
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 13)),
+                                      ]),
 
-                            // Item id
+                                  // Adding some space
+                                  const SizedBox(height: 2),
 
-                            Text("Id:1234",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13))
-                          ]),
+                                  //  Available total food
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                            _controller.menus[index].description
+                                                .toString(),
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 13)),
+                                        Text(
+                                            _controller.menus[index].status
+                                                .toString(),
+                                            style: const TextStyle(
+                                                color: Colors.green,
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 13))
+                                        // : Text("Disabled",
+                                        //     style: TextStyle(
+                                        //         color: ColorManager.primary,
+                                        //         fontWeight: FontWeight.w300,
+                                        //         fontSize: 13))
+                                      ])
+                                ])),
 
-                      // Adding some space
-                      const SizedBox(height: 2),
+                            // Divider
+                            Divider(color: Colors.grey.withOpacity(0.2)),
+                          ])),
+                ],
+              )),
 
-                      //  Available total food
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text("10 food items available in this menu",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13)),
-                            index != 1
-                                ? const Text("Enable",
-                                    style: TextStyle(
-                                        color: Colors.green,
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 13))
-                                : Text("Disabled",
-                                    style: TextStyle(
-                                        color: ColorManager.primary,
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 13))
-                          ])
-                    ])),
+        // All new menu list
 
-                // Divider
-                Divider(color: Colors.grey.withOpacity(0.2)),
-              ])),
+        // Add new menu button
 
-      // Add new menu button
-
-      Obx(() => _controller.menuLoading.value
-          ? Loader().show()
-          : OutlineBoxManager(
-              onTap: () {
-                Get.to(() => AddNewMenu());
-              },
-              text: "Add New Menu",
-              color: ColorManager.primary,
-              fontFamily: true))
-    ])));
+        Obx(() => _controller.menuaddLoading.value
+            ? Loader().show()
+            : OutlineBoxManager(
+                onTap: () {
+                  Get.to(() => AddNewMenu());
+                },
+                text: "Add New Menu",
+                color: ColorManager.primary,
+                fontFamily: true))
+      ]),
+    )));
   }
 }
