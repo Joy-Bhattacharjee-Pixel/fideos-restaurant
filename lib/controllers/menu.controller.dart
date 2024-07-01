@@ -47,9 +47,10 @@ class RestaurantMenuController extends GetxController {
     // Check for success in the response
     if (addresponse["success"] != null) {
       log(addresponse["success"].toString());
-      // menus.assignAll();
+      menus.add(Menu.fromJson(addresponse["success"]));
       // Refreshing menus
       allMenus();
+      // menus.refresh();
 
       // Add new menu successfully - show this message
       FlashManager().show("Add new menu successfully");
@@ -61,37 +62,7 @@ class RestaurantMenuController extends GetxController {
     menuaddLoading.value = false;
   }
 
-// Fetching Menu Details
-  // fetchmenudetails() async {
-  //   // Starting loader for menu Details
-  //   fetchmenuLoading.value = true;
-
-  //   // Creating menu isntance
-  //   final menu = Menu();
-  //   // Fetching id from the saved cookieManager
-  //   final id = await CookieManager("id").get();
-  //   log(id.toString());
-
-  //   final fetchMenuResponse = await menu.fetchmenu(restaurantId: id.toString());
-
-  //   // if response error
-  //   if (fetchMenuResponse["error"] != null) {
-  //     // Showing error maessage
-  //     FlashManager().show(fetchMenuResponse["error"]);
-  //     // If response success
-  //   } else if (fetchMenuResponse["success"] != null) {
-  //     // Assigning all menu coming from response to model = List of menu model
-  //     menus.assignAll(fetchMenuResponse["Success"]);
-
-  //     // Refreshing list of menu
-  //     menus.refresh();
-  //     // Showing error maessage
-  //     FlashManager().show("Fetch Menu successfully");
-  //   }
-  //   // Stop loader for menu Details
-  //   fetchmenuLoading.value = false;
-  // }
-  // Fetching all foods
+  // Fetching all menus
   allMenus() async {
     // Stating loader for menu fetch
     menuLoading.value = true;
@@ -102,7 +73,7 @@ class RestaurantMenuController extends GetxController {
     // Fetching id from the saved cookieManager
     final id = await CookieManager("id").get();
 
-    // Fetching all menus using food model
+    // Fetching all menus using menu model
     final menuResponse = await menu.fetchmenu(restaurantId: id!);
 
     // if response error

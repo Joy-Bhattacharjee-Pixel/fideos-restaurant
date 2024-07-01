@@ -101,12 +101,12 @@ class FoodController extends GetxController {
       // Navigating to list screen
       Get.back();
     }
-
+      
     // Stopping food adding loader
     foodAdding.value = false;
   }
 
-// image picker
+  // image picker
   Future<void> get pickImage async {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
